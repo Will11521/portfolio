@@ -2,26 +2,61 @@ import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm';
 import ScrollTrigger from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollTrigger.min.js';
 gsap.registerPlugin(ScrollTrigger);
 
-// Hero intro animation
+// Landing Curtain Animation
+const landingCurtain = document.createElement("div");
+landingCurtain.style.position = "fixed";
+landingCurtain.style.top = 0;
+landingCurtain.style.left = 0;
+landingCurtain.style.width = "100vw";
+landingCurtain.style.height = "100vh";
+landingCurtain.style.backgroundColor = "#fdf6ef";
+landingCurtain.style.zIndex = 999;
+landingCurtain.style.pointerEvents = "none";
+landingCurtain.style.opacity = 1;
+document.body.appendChild(landingCurtain);
+
+gsap.to(landingCurtain, {
+  delay: 0.2,
+  duration: 1.2,
+  ease: "power2.inOut",
+  opacity: 0,
+  onComplete: () => landingCurtain.remove()
+});
+
+// Hero Text Animation
 window.addEventListener('DOMContentLoaded', () => {
   gsap.from(".hero h1", {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out"
-  });
-  gsap.from(".hero p", {
-    y: 20,
+    y: 80,
     opacity: 0,
     delay: 0.4,
-    duration: 1,
-    ease: "power2.out"
+    duration: 1.2,
+    ease: "power4.out"
+  });
+  gsap.from(".hero p", {
+    y: 40,
+    opacity: 0,
+    delay: 0.8,
+    duration: 1.2,
+    ease: "power3.out"
   });
 });
 
-// Scroll reveal for interactive sections
-const sections = document.querySelectorAll(".project, .contact, .about, .skill-card, .fun-facts");
-sections.forEach((el, index) => {
+// Group Scroll Reveal for Projects
+gsap.from(".project-grid", {
+  scrollTrigger: {
+    trigger: ".project-grid",
+    start: "top 85%",
+    toggleActions: "play none none reset"
+  },
+  y: 50,
+  opacity: 0,
+  duration: 1,
+  ease: "power2.out"
+});
+
+// Scroll reveal for other sections
+const otherSections = document.querySelectorAll(".contact, .about, .skill-card, .fun-facts");
+otherSections.forEach((el, index) => {
   gsap.from(el, {
     scrollTrigger: {
       trigger: el,
@@ -36,7 +71,33 @@ sections.forEach((el, index) => {
   });
 });
 
-// Cursor-follow glow effect
+// Magnetic Hover ONLY for Calendly Button
+const calendlyButton = document.getElementById("calendlyToggle");
+
+if (calendlyButton) {
+  calendlyButton.addEventListener("mousemove", e => {
+    const rect = calendlyButton.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    gsap.to(calendlyButton, {
+      x: x * 0.1,
+      y: y * 0.1,
+      duration: 0.2,
+      ease: "power2.out"
+    });
+  });
+
+  calendlyButton.addEventListener("mouseleave", () => {
+    gsap.to(calendlyButton, {
+      x: 0,
+      y: 0,
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+}
+
+// Cursor Glow Effect
 const glow = document.createElement("div");
 glow.style.position = "absolute";
 glow.style.width = "120px";
@@ -57,24 +118,24 @@ window.addEventListener("mousemove", (e) => {
   });
 });
 
-// Parallax background movement
+// Background Zoom Scroll Effect
 const bg = document.querySelector(".bg");
 window.addEventListener("scroll", () => {
   const offset = window.scrollY * 0.2;
-  bg.style.transform = `translateY(${offset}px)`;
+  const scale = 1 + window.scrollY * 0.0003;
+  bg.style.transform = `translateY(${offset}px) scale(${scale})`;
 });
 
-// Calendly toggle logic
-const toggleButton = document.getElementById("calendlyToggle");
+// Calendly Embed Toggle
 const calendlyContainer = document.getElementById("calendlyContainer");
 
-if (toggleButton && calendlyContainer) {
-  toggleButton.addEventListener("click", () => {
+if (calendlyButton && calendlyContainer) {
+  calendlyButton.addEventListener("click", () => {
     calendlyContainer.classList.toggle("visible");
   });
 }
 
-// Fun Fact Stacker with cap at 5 and dramatic fade-in
+// Fun Fact Stack Animation
 const facts = [
   "🎓 I’m studying Interactive Media Design at Algonquin College — and somehow surviving!",
   "🐶 My golden lab back in India has been with me since she was 20 days old. She’s basically family.",
@@ -98,7 +159,6 @@ if (factList) {
       li.classList.add("show");
     }, 100);
 
-    // Limit to last 5 fun facts
     const allFacts = factList.querySelectorAll("li");
     if (allFacts.length > 5) {
       factList.removeChild(allFacts[0]);
@@ -107,6 +167,6 @@ if (factList) {
     index = (index + 1) % facts.length;
   };
 
-  showNextFact(); // first one immediately
+  showNextFact();
   setInterval(showNextFact, 8000);
 }
