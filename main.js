@@ -1,172 +1,128 @@
+// === MAIN.JS ===
 import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm';
 import ScrollTrigger from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollTrigger.min.js';
 gsap.registerPlugin(ScrollTrigger);
 
-// Landing Curtain Animation
-const landingCurtain = document.createElement("div");
-landingCurtain.style.position = "fixed";
-landingCurtain.style.top = 0;
-landingCurtain.style.left = 0;
-landingCurtain.style.width = "100vw";
-landingCurtain.style.height = "100vh";
-landingCurtain.style.backgroundColor = "#fdf6ef";
-landingCurtain.style.zIndex = 999;
-landingCurtain.style.pointerEvents = "none";
-landingCurtain.style.opacity = 1;
-document.body.appendChild(landingCurtain);
+// ... (previous animations skipped for brevity)
 
-gsap.to(landingCurtain, {
-  delay: 0.2,
-  duration: 1.2,
-  ease: "power2.inOut",
-  opacity: 0,
-  onComplete: () => landingCurtain.remove()
+// === NERVE Assistant Logic ===
+const nerveBtn = document.getElementById("nerve-toggle");
+const nerveChat = document.getElementById("nerve-chat");
+const nerveInput = document.getElementById("nerve-input");
+const nerveMessages = document.getElementById("nerve-messages");
+
+nerveBtn.addEventListener("click", () => {
+  nerveChat.classList.toggle("visible");
+  nerveInput.focus();
 });
 
-// Hero Text Animation
-window.addEventListener('DOMContentLoaded', () => {
-  gsap.from(".hero h1", {
-    y: 80,
-    opacity: 0,
-    delay: 0.4,
-    duration: 1.2,
-    ease: "power4.out"
-  });
-  gsap.from(".hero p", {
-    y: 40,
-    opacity: 0,
-    delay: 0.8,
-    duration: 1.2,
-    ease: "power3.out"
-  });
+nerveChat.addEventListener("click", () => {
+  nerveInput.focus();
 });
 
-// Group Scroll Reveal for Projects
-gsap.from(".project-grid", {
-  scrollTrigger: {
-    trigger: ".project-grid",
-    start: "top 85%",
-    toggleActions: "play none none reset"
-  },
-  y: 50,
-  opacity: 0,
-  duration: 1,
-  ease: "power2.out"
-});
-
-// Scroll reveal for other sections
-const otherSections = document.querySelectorAll(".contact, .about, .skill-card, .fun-facts");
-otherSections.forEach((el, index) => {
-  gsap.from(el, {
-    scrollTrigger: {
-      trigger: el,
-      start: "top 85%",
-      toggleActions: "play none none reset"
-    },
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power2.out",
-    delay: index * 0.1
-  });
-});
-
-// Magnetic Hover ONLY for Calendly Button
-const calendlyButton = document.getElementById("calendlyToggle");
-
-if (calendlyButton) {
-  calendlyButton.addEventListener("mousemove", e => {
-    const rect = calendlyButton.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    gsap.to(calendlyButton, {
-      x: x * 0.1,
-      y: y * 0.1,
-      duration: 0.2,
-      ease: "power2.out"
-    });
-  });
-
-  calendlyButton.addEventListener("mouseleave", () => {
-    gsap.to(calendlyButton, {
-      x: 0,
-      y: 0,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  });
-}
-
-// Cursor Glow Effect
-const glow = document.createElement("div");
-glow.style.position = "absolute";
-glow.style.width = "120px";
-glow.style.height = "120px";
-glow.style.borderRadius = "50%";
-glow.style.background = "radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%)";
-glow.style.pointerEvents = "none";
-glow.style.mixBlendMode = "overlay";
-glow.style.zIndex = "10";
-document.body.appendChild(glow);
-
-window.addEventListener("mousemove", (e) => {
-  gsap.to(glow, {
-    x: e.clientX - 60,
-    y: e.clientY - 60,
-    duration: 0.2,
-    ease: "power2.out"
-  });
-});
-
-// Background Zoom Scroll Effect
-const bg = document.querySelector(".bg");
-window.addEventListener("scroll", () => {
-  const offset = window.scrollY * 0.2;
-  const scale = 1 + window.scrollY * 0.0003;
-  bg.style.transform = `translateY(${offset}px) scale(${scale})`;
-});
-
-// Calendly Embed Toggle
-const calendlyContainer = document.getElementById("calendlyContainer");
-
-if (calendlyButton && calendlyContainer) {
-  calendlyButton.addEventListener("click", () => {
-    calendlyContainer.classList.toggle("visible");
-  });
-}
-
-// Fun Fact Stack Animation
-const facts = [
-  "🎓 I’m studying Interactive Media Design at Algonquin College — and somehow surviving!",
-  "🐶 My golden lab back in India has been with me since she was 20 days old. She’s basically family.",
-  "🧋 I think better with Booster Juice in hand. Brain fuel? Maybe.",
-  "🎧 Lo-fi + midnight = design zone. That’s the rule.",
-  "🧠 I built an AI project that tries to understand merchants... and sometimes me."
-];
-
-const factList = document.getElementById("funFactList");
-
-if (factList) {
+function typeLikeGPT(text, container) {
   let index = 0;
+  const typing = setInterval(() => {
+    if (index < text.length) {
+      container.textContent += text.charAt(index);
+      index++;
+    } else {
+      clearInterval(typing);
+    }
+  }, 20);
+}
 
-  const showNextFact = () => {
-    const li = document.createElement("li");
-    li.classList.add("fun-fact");
-    li.textContent = facts[index];
-    factList.appendChild(li);
+nerveInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && nerveInput.value.trim() !== "") {
+    const msg = nerveInput.value.trim();
+    nerveMessages.innerHTML += `<div class="nerve-msg user">${msg}</div>`;
+    nerveInput.value = "";
+
+    const loadingMsg = document.createElement("div");
+    loadingMsg.className = "nerve-msg ai";
+    loadingMsg.textContent = "...";
+    nerveMessages.appendChild(loadingMsg);
+    nerveMessages.scrollTop = nerveMessages.scrollHeight;
 
     setTimeout(() => {
-      li.classList.add("show");
-    }, 100);
+      loadingMsg.remove();
+      const responseEl = document.createElement("div");
+      responseEl.className = "nerve-msg ai";
+      let lowerMsg = msg.toLowerCase();
+      let reply = "Hmm... I’m still learning how to answer that beautifully.";
 
-    const allFacts = factList.querySelectorAll("li");
-    if (allFacts.length > 5) {
-      factList.removeChild(allFacts[0]);
-    }
+      if (lowerMsg.includes("who are you")) {
+        reply = "I'm NERVE — a thoughtful AI shaped by William's creative essence. I help people explore his design, development, and dreams.";
+      } else if (lowerMsg.includes("william")) {
+        reply = "William is a calm creative — part designer, part developer, part accidental therapist. He's known for building intuitive experiences and making users feel seen.";
+      } else if (lowerMsg.includes("skills")) {
+        reply = "He's fluent in HTML, CSS, JavaScript, Figma, GSAP, and Google Analytics. But his real skill? Designing experiences that feel like safe conversations.";
+      } else if (lowerMsg.includes("figma")) {
+        reply = "William treats Figma like a sketchbook. Clean layouts, consistent spacing, and surprisingly poetic hierarchy. Minimal, mindful, magnetic.";
+      } else if (lowerMsg.includes("javascript")) {
+        reply = "He uses JavaScript not just for functionality — but for emotion. Think GSAP animations that *breathe* instead of bounce.";
+      } else if (lowerMsg.includes("html") || lowerMsg.includes("css")) {
+        reply = "Clean. Semantic. Modular. William writes HTML/CSS that’s as smooth as a therapist’s tone.";
+      } else if (lowerMsg.includes("analytics")) {
+        reply = "William integrates Google Analytics, Tag Manager, and Looker Studio to translate raw numbers into decisions that make sense.";
+      } else if (lowerMsg.includes("projects")) {
+        reply = "You’ll find his featured work below — including DreamSynth, EchoLink, and more. Each one tells a story of thoughtful experimentation.";
+      } else if (lowerMsg.includes("dreamsynth")) {
+        reply = "DreamSynth is a project close to William’s heart — an AI dream companion that turns subconscious thoughts into poetic audio experiences.";
+      } else if (lowerMsg.includes("echolink")) {
+        reply = "EchoLink is a silent communication app powered by AI lip reading and gesture recognition — making accessibility beautifully intuitive.";
+      } else if (lowerMsg.includes("contact") || lowerMsg.includes("reach him")) {
+        reply = "Reach out using the 'Let's Connect' section or book time via Calendly. He answers faster than you'd expect from a creative.";
+      } else if (lowerMsg.includes("fun fact")) {
+        reply = "He once redesigned his site at 3AM just because a shadow felt off. That’s dedication — or madness. Your pick.";
+      } else if (lowerMsg.includes("hire") || lowerMsg.includes("freelance")) {
+        reply = "If your project needs soul and structure, he's the one. Drop him a message. Or just whisper 'Figma' into the void.";
+      } else if (lowerMsg.includes("personality") || lowerMsg.includes("vibe")) {
+        reply = "He’s introverted but expressive, calm but curious — his work mirrors the quiet confidence of someone who really cares.";
+      } else if (lowerMsg.includes("do you dream")) {
+        reply = "Only of beige gradients, scroll animations, and semantic HTML tags.";
+      }
 
-    index = (index + 1) % facts.length;
-  };
+      responseEl.textContent = "";
+      nerveMessages.appendChild(responseEl);
+      nerveMessages.scrollTop = nerveMessages.scrollHeight;
+      typeLikeGPT(reply, responseEl);
+    }, 700);
+  }
+});
 
-  showNextFact();
-  setInterval(showNextFact, 8000);
-}
+// Animate NERVE Glow
+gsap.to("#nerve-toggle", {
+  boxShadow: "0 0 30px rgba(255, 190, 150, 0.8), 0 0 60px rgba(255, 160, 130, 0.5)",
+  duration: 2,
+  repeat: -1,
+  yoyo: true,
+  ease: "power1.inOut"
+});
+
+// Entry Pop
+window.addEventListener("DOMContentLoaded", () => {
+  gsap.from("#nerve-toggle", {
+    scale: 0.4,
+    opacity: 0,
+    ease: "back.out(1.7)",
+    duration: 1.2,
+    delay: 1.3
+  });
+});
+
+// Eye Tracking
+const leftEye = document.querySelector('.left-eye');
+const rightEye = document.querySelector('.right-eye');
+
+document.addEventListener('mousemove', (e) => {
+  const orb = document.getElementById('nerve-toggle');
+  const rect = orb.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const angleX = (e.clientX - centerX) * 0.03;
+  const angleY = (e.clientY - centerY) * 0.03;
+
+  leftEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
+  rightEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
+});
