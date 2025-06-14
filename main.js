@@ -126,3 +126,44 @@ document.addEventListener('mousemove', (e) => {
   leftEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
   rightEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
 });
+// === Fun Facts Logic ===
+window.addEventListener("DOMContentLoaded", () => {
+  const facts = [
+    "🎓 I’m studying Interactive Media Design at Algonquin College — and somehow surviving!",
+    "🐶 My golden lab back in India has been with me since she was 20 days old. She’s basically family.",
+    "🧋 I think better with Booster Juice in hand. Brain fuel? Maybe.",
+    "🎧 Lo-fi + midnight = design zone. That’s the rule.",
+    "🧠 I built an AI project that tries to understand merchants... and sometimes me.",
+    "🛠 I once refactored a site just because a border-radius looked ‘too sharp’.",
+    "💡 My best ideas come when I’m trying to sleep — naturally.",
+    "🔮 DreamSynth was born out of a lucid dream. Seriously.",
+    "🌙 I believe in emotionally intelligent design — interfaces should feel like safe spaces."
+  ];
+
+  const factList = document.getElementById("funFactList");
+
+  if (factList) {
+    let index = 0;
+
+    const showNextFact = () => {
+      const li = document.createElement("li");
+      li.classList.add("fun-fact");
+      li.textContent = facts[index];
+      factList.appendChild(li);
+
+      setTimeout(() => {
+        li.classList.add("show");
+      }, 100);
+
+      const allFacts = factList.querySelectorAll("li");
+      if (allFacts.length > 5) {
+        factList.removeChild(allFacts[0]);
+      }
+
+      index = (index + 1) % facts.length;
+    };
+
+    showNextFact();
+    setInterval(showNextFact, 3000); // 5 seconds
+  }
+});
