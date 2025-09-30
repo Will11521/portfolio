@@ -35,7 +35,10 @@ function typeLikeGPT(text, container) {
 nerveInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && nerveInput.value.trim() !== "") {
     const msg = nerveInput.value.trim();
-    nerveMessages.innerHTML += `<div class="nerve-msg user">${msg}</div>`;
+    const userMsg = document.createElement("div");
+    userMsg.className = "nerve-msg user";
+    userMsg.textContent = msg;
+    nerveMessages.appendChild(userMsg);
     nerveInput.value = "";
 
     const loadingMsg = document.createElement("div");
@@ -48,45 +51,187 @@ nerveInput.addEventListener("keydown", (e) => {
       loadingMsg.remove();
       const responseEl = document.createElement("div");
       responseEl.className = "nerve-msg ai";
-      let lowerMsg = msg.toLowerCase();
-      let reply = "Hmm... I’m still learning how to answer that beautifully.";
+      let lowerMsg = msg.toLowerCase().trim();
+      
+      // Intent parsing rules
+      let intent = "unknown";
+      let projectName = "";
+      
+      if (lowerMsg.includes("about") || lowerMsg.includes("who") || lowerMsg.includes("william")) {
+        intent = "about";
+      } else if (lowerMsg.includes("skills") || lowerMsg.includes("tools") || lowerMsg.includes("tech")) {
+        intent = "skills";
+      } else if (lowerMsg.includes("projects") && !lowerMsg.includes("project:")) {
+        intent = "projects";
+      } else if (lowerMsg.startsWith("project:")) {
+        intent = "project";
+        projectName = lowerMsg.replace("project:", "").trim();
+      } else if (lowerMsg.includes("contact") || lowerMsg.includes("reach") || lowerMsg.includes("email") || lowerMsg.includes("phone")) {
+        intent = "contact";
+      } else if (lowerMsg.includes("recruiter") || lowerMsg.includes("hire") || lowerMsg.includes("job") || lowerMsg.includes("resume")) {
+        intent = "recruiter";
+      } else if (lowerMsg.includes("fun") || lowerMsg.includes("fact") || lowerMsg.includes("interesting")) {
+        intent = "funfacts";
+      } else if (lowerMsg.includes("help") || lowerMsg.includes("what") || lowerMsg.includes("can you")) {
+        intent = "help";
+      } else if (lowerMsg.includes("analytics") || lowerMsg.includes("dreamsynth") || lowerMsg.includes("echolink") || lowerMsg.includes("therapy") || lowerMsg.includes("system")) {
+        intent = "project";
+        projectName = lowerMsg;
+      }
 
-      if (lowerMsg.includes("who are you")) {
-        reply = "I'm NERVE — a thoughtful AI shaped by William's creative essence. I help people explore his design, development, and dreams.";
-      } else if (lowerMsg.includes("william")) {
-        reply = "William is a calm creative — part designer, part developer, part accidental therapist. He's known for building intuitive experiences and making users feel seen.";
-      } else if (lowerMsg.includes("skills")) {
-        reply = "He's fluent in HTML, CSS, JavaScript, Figma, GSAP, and Google Analytics. But his real skill? Designing experiences that feel like safe conversations.";
-      } else if (lowerMsg.includes("figma")) {
-        reply = "William treats Figma like a sketchbook. Clean layouts, consistent spacing, and surprisingly poetic hierarchy. Minimal, mindful, magnetic.";
-      } else if (lowerMsg.includes("javascript")) {
-        reply = "He uses JavaScript not just for functionality — but for emotion. Think GSAP animations that *breathe* instead of bounce.";
-      } else if (lowerMsg.includes("html") || lowerMsg.includes("css")) {
-        reply = "Clean. Semantic. Modular. William writes HTML/CSS that’s as smooth as a therapist’s tone.";
-      } else if (lowerMsg.includes("analytics")) {
-        reply = "William integrates Google Analytics, Tag Manager, and Looker Studio to translate raw numbers into decisions that make sense.";
-      } else if (lowerMsg.includes("projects")) {
-        reply = "You’ll find his featured work below — including DreamSynth, EchoLink, and more. Each one tells a story of thoughtful experimentation.";
-      } else if (lowerMsg.includes("dreamsynth")) {
-        reply = "DreamSynth is a project close to William’s heart — an AI dream companion that turns subconscious thoughts into poetic audio experiences.";
-      } else if (lowerMsg.includes("echolink")) {
-        reply = "EchoLink is a silent communication app powered by AI lip reading and gesture recognition — making accessibility beautifully intuitive.";
-      } else if (lowerMsg.includes("contact") || lowerMsg.includes("reach him")) {
-        reply = "Reach out using the 'Let's Connect' section or book time via Calendly. He answers faster than you'd expect from a creative.";
-      } else if (lowerMsg.includes("fun fact")) {
-        reply = "He once redesigned his site at 3AM just because a shadow felt off. That’s dedication — or madness. Your pick.";
-      } else if (lowerMsg.includes("hire") || lowerMsg.includes("freelance")) {
-        reply = "If your project needs soul and structure, he's the one. Drop him a message. Or just whisper 'Figma' into the void.";
-      } else if (lowerMsg.includes("personality") || lowerMsg.includes("vibe")) {
-        reply = "He’s introverted but expressive, calm but curious — his work mirrors the quiet confidence of someone who really cares.";
-      } else if (lowerMsg.includes("do you dream")) {
-        reply = "Only of beige gradients, scroll animations, and semantic HTML tags.";
+      let reply = "";
+      let showQuickReplies = false;
+      let quickReplies = [];
+
+      switch (intent) {
+        case "about":
+          reply = "William is a designer and developer studying Interactive Media Design at Algonquin College. He builds user-centered digital experiences with clean code and thoughtful design.";
+          break;
+          
+        case "skills":
+          reply = "Technical skills: HTML5, CSS3, JavaScript, Figma, GSAP, Google Analytics, UX Strategy, GitHub. Focuses on creating accessible, performant interfaces.";
+          break;
+          
+        case "projects":
+          reply = "Featured projects:\n• Analytics Dashboard — Real-time merchant insights\n• EchoLink — Silent communication with AI\n• Online Therapy Website — Mental health support\n• The System — CSS-based space exploration\n• DreamSynth — AI dream journaling & sleep stories";
+          showQuickReplies = true;
+          quickReplies = ["Analytics Dashboard", "EchoLink", "Online Therapy", "The System", "DreamSynth"];
+          break;
+          
+        case "project":
+          if (projectName.includes("analytics")) {
+            reply = "Analytics Dashboard:\n• Real-time merchant insights\n• Data visualization for decision-making\n• Built with modern web technologies\n\nOpen: https://will11521.github.io/analytics-by-william/";
+          } else if (projectName.includes("echolink")) {
+            reply = "EchoLink:\n• Silent communication with AI lip reading\n• Gesture recognition for accessibility\n• Intuitive interface design\n\nExplore: https://www.figma.com/proto/qtE2hczc0tLQzhd4pDeMxG/Untitled?node-id=2-37&starting-point-node-id=2%3A37";
+          } else if (projectName.includes("therapy")) {
+            reply = "Online Therapy Website:\n• Mental health support platform\n• Built with HTML + CSS\n• Accessible, calming design\n\nVisit: https://will11521.github.io/mtm6201_final/";
+          } else if (projectName.includes("system")) {
+            reply = "The System:\n• CSS-based space exploration\n• Interactive planet navigation\n• Pure CSS animations and effects\n\nOrbit: https://will11521.github.io/MidT/";
+          } else if (projectName.includes("dreamsynth")) {
+            reply = "DreamSynth:\n• AI-powered dream journaling\n• Emotion tracking & sleep stories\n• Audio experience platform\n\nExperience: https://will11521.github.io/dreamsynth-frontend/";
+          } else {
+            reply = "I can tell you about: Analytics Dashboard, EchoLink, Online Therapy, The System, or DreamSynth. Which one interests you?";
+          }
+          break;
+          
+        case "contact":
+          reply = "Contact William:\n📧 Email: williamjeetsingh2004@gmail.com\n📞 Phone: +1 (437) 872-1500\n\nI'll reveal the booking calendar for you...";
+          // Reveal Calendly container
+          const calendlyContainer = document.getElementById("calendlyContainer");
+          if (calendlyContainer) {
+            calendlyContainer.classList.add("visible");
+          }
+          break;
+          
+        case "recruiter":
+          reply = "William — Designer & Developer\n\nCore Skills: HTML5, CSS3, JavaScript, Figma, GSAP, Google Analytics, UX Strategy\n\nFeatured Projects:\n• DreamSynth — AI dream journaling platform\n• Analytics Dashboard — Real-time merchant insights\n• EchoLink — Silent communication with AI lip reading\n\nContact:\n📧 Email: williamjeetsingh2004@gmail.com\n📅 Book Call: https://calendly.com/williamjeetsingh2004\n📄 Resume: Click to view my resume";
+          break;
+          
+        case "funfacts":
+          reply = "About William:\n• Studying Interactive Media Design at Algonquin College\n• Has a golden lab back in India since she was 20 days old\n• Thinks better with Booster Juice in hand\n• Best ideas come when trying to sleep\n• Built DreamSynth from a lucid dream";
+          break;
+          
+        case "help":
+          reply = "I can help with:\n• about — Learn about William\n• skills — See his technical skills\n• projects — Browse featured work\n• project:[name] — Get details on specific projects\n• contact — Get contact information\n• recruiter — Recruiter-focused summary\n• funfacts — Interesting tidbits\n• help — Show this menu";
+          break;
+          
+        default:
+          reply = "I'm not sure how to help with that. Try: about, skills, projects, contact, recruiter, funfacts, or help.";
+          showQuickReplies = true;
+          quickReplies = ["about", "skills", "projects", "contact", "help"];
       }
 
       responseEl.textContent = "";
       nerveMessages.appendChild(responseEl);
       nerveMessages.scrollTop = nerveMessages.scrollHeight;
       typeLikeGPT(reply, responseEl);
+      
+      // Add resume click handler for recruiter intent
+      if (intent === "recruiter") {
+        setTimeout(() => {
+          const resumeText = responseEl.textContent;
+          if (resumeText.includes("Click to view my resume")) {
+            responseEl.innerHTML = resumeText.replace(
+              "Click to view my resume", 
+              '<span style="color: #d4a373; cursor: pointer; text-decoration: underline;" id="resume-link">Click to view my resume</span>'
+            );
+            
+            // Add click event listener
+            const resumeLink = document.getElementById("resume-link");
+            if (resumeLink) {
+              resumeLink.addEventListener("click", () => {
+                window.open("Williamjeet Singh.pdf", "_blank");
+              });
+            }
+          }
+        }, reply.length * 20 + 500);
+      }
+      
+      // Add quick reply chips if needed
+      if (showQuickReplies && quickReplies.length > 0) {
+        setTimeout(() => {
+          const quickReplyContainer = document.createElement("div");
+          quickReplyContainer.className = "quick-replies";
+          quickReplyContainer.style.marginTop = "10px";
+          quickReplyContainer.style.display = "flex";
+          quickReplyContainer.style.flexWrap = "wrap";
+          quickReplyContainer.style.gap = "8px";
+          
+          quickReplies.forEach(replyText => {
+            const chip = document.createElement("button");
+            chip.textContent = replyText;
+            chip.className = "quick-reply-chip";
+            chip.style.cssText = `
+              background: #fce8dc;
+              border: 1px solid #d4a373;
+              border-radius: 16px;
+              padding: 4px 12px;
+              font-size: 12px;
+              cursor: pointer;
+              color: #5b4134;
+              transition: all 0.2s ease;
+            `;
+            
+            chip.addEventListener("mouseenter", () => {
+              chip.style.background = "#d4a373";
+              chip.style.color = "white";
+            });
+            
+            chip.addEventListener("mouseleave", () => {
+              chip.style.background = "#fce8dc";
+              chip.style.color = "#5b4134";
+            });
+            
+            chip.addEventListener("click", () => {
+              if (intent === "projects") {
+                // Smooth scroll to projects section
+                const projectsSection = document.querySelector(".projects");
+                if (projectsSection) {
+                  projectsSection.scrollIntoView({ behavior: "smooth" });
+                }
+              } else {
+                // Simulate typing the quick reply
+                nerveInput.value = replyText;
+                nerveInput.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+              }
+              // Return focus to input after click
+              nerveInput.focus();
+            });
+            
+            // Handle keyboard navigation for chips
+            chip.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                chip.click();
+              }
+            });
+            
+            quickReplyContainer.appendChild(chip);
+          });
+          
+          responseEl.appendChild(quickReplyContainer);
+        }, reply.length * 20 + 500);
+      }
     }, 700);
   }
 });
