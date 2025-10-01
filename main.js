@@ -20,6 +20,26 @@ nerveChat.addEventListener("click", () => {
   nerveInput.focus();
 });
 
+// === Calendly Deferred Loading ===
+const calendlyToggle = document.getElementById("calendlyToggle");
+const calendlyContainer = document.getElementById("calendlyContainer");
+const calendlyIframe = document.querySelector("#calendlyContainer iframe");
+
+let calendlyLoaded = false;
+
+calendlyToggle.addEventListener("click", () => {
+  calendlyContainer.classList.toggle("visible");
+  
+  // Load Calendly only on first click
+  if (!calendlyLoaded && calendlyIframe) {
+    const dataSrc = calendlyIframe.getAttribute("data-src");
+    if (dataSrc) {
+      calendlyIframe.src = dataSrc;
+      calendlyLoaded = true;
+    }
+  }
+});
+
 function typeLikeGPT(text, container) {
   let index = 0;
   const typing = setInterval(() => {
@@ -116,10 +136,16 @@ nerveInput.addEventListener("keydown", (e) => {
           
         case "contact":
           reply = "Contact William:\n📧 Email: williamjeetsingh2004@gmail.com\n📞 Phone: +1 (437) 872-1500\n\nI'll reveal the booking calendar for you...";
-          // Reveal Calendly container
-          const calendlyContainer = document.getElementById("calendlyContainer");
+          // Reveal Calendly container and load iframe
           if (calendlyContainer) {
             calendlyContainer.classList.add("visible");
+            if (!calendlyLoaded && calendlyIframe) {
+              const dataSrc = calendlyIframe.getAttribute("data-src");
+              if (dataSrc) {
+                calendlyIframe.src = dataSrc;
+                calendlyLoaded = true;
+              }
+            }
           }
           break;
           
@@ -236,9 +262,10 @@ nerveInput.addEventListener("keydown", (e) => {
   }
 });
 
-// Animate NERVE Glow
-gsap.to("#nerve-toggle", {
-  boxShadow: "0 0 30px rgba(255, 190, 150, 0.8), 0 0 60px rgba(255, 160, 130, 0.5)",
+// Animate NERVE Glow (GPU-optimized)
+gsap.to("#nerve-toggle .orb-face::before", {
+  scale: 1.2,
+  opacity: 0.8,
   duration: 2,
   repeat: -1,
   yoyo: true,
@@ -271,6 +298,15 @@ document.addEventListener('mousemove', (e) => {
   leftEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
   rightEye.style.transform = `translate(${angleX}px, ${angleY}px)`;
 });
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => console.log('SW registered'))
+      .catch(error => console.log('SW registration failed:', error));
+  });
+}
 // === Fun Facts Logic ===
 window.addEventListener("DOMContentLoaded", () => {
   const facts = [

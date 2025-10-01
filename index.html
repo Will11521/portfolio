@@ -24,7 +24,7 @@
   
   <!-- Performance Hints -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-  <link rel="preload" href="assets/3d-bg.png" as="image" />
+  <link rel="preload" href="assets/3d-bg.png" as="image" fetchpriority="high" />
   <meta name="theme-color" content="#a07156" />
   
   <!-- Content Security Policy -->
@@ -78,31 +78,35 @@
     <h2>Featured Work</h2>
     <div class="project-grid">
       <div class="project">
-        <img src="assets/analytics.png" alt="Analytics Dashboard Screenshot" class="project-img" loading="lazy" />
+        <picture>
+          <source srcset="assets/analytics.webp" type="image/webp">
+          <source srcset="assets/analytics.avif" type="image/avif">
+          <img src="assets/analytics.png" alt="Analytics Dashboard Screenshot" class="project-img" loading="lazy" width="300" height="180" />
+        </picture>
         <h3>🧠 Analytics Dashboard</h3>
         <p>Real-time merchant insights powered by logic and lore.</p>
         <a href="https://will11521.github.io/analytics-by-william/" target="_blank" rel="noopener noreferrer">Launch</a>
       </div>
       <div class="project">
-        <img src="assets/figma.png" alt="EchoLink Screenshot" class="project-img" loading="lazy" />
+        <img src="assets/figma.png" alt="EchoLink Screenshot" class="project-img" loading="lazy" width="300" height="180" />
         <h3>🗣 EchoLink</h3>
         <p>Silent communication with AI lip reading + gestures.</p>
         <a href="https://www.figma.com/proto/qtE2hczc0tLQzhd4pDeMxG/Untitled?node-id=2-37&starting-point-node-id=2%3A37" target="_blank" rel="noopener noreferrer">Explore</a>
       </div>
       <div class="project">
-        <img src="assets/therapy.png" alt="Online Therapy Website Screenshot" class="project-img" loading="lazy" />
+        <img src="assets/therapy.png" alt="Online Therapy Website Screenshot" class="project-img" loading="lazy" width="300" height="180" />
         <h3>🩺 Online Therapy Website</h3>
         <p>Safe space for the mind — built in HTML + CSS with love.</p>
         <a href="https://will11521.github.io/mtm6201_final/" target="_blank" rel="noopener noreferrer">Visit</a>
       </div>
       <div class="project">
-        <img src="assets/solar.png" alt="The System Website Screenshot" class="project-img" loading="lazy" />
+        <img src="assets/solar.png" alt="The System Website Screenshot" class="project-img" loading="lazy" width="300" height="180" />
         <h3>🌌 The System</h3>
         <p>Planet-hopping through CSS-based galaxies.</p>
         <a href="https://will11521.github.io/MidT/" target="_blank" rel="noopener noreferrer">Orbit</a>
       </div>
       <div class="project">
-        <img src="assets/dreamsynth.png" alt="DreamSynth Screenshot" class="project-img" loading="lazy" />
+        <img src="assets/dreamsynth.png" alt="DreamSynth Screenshot" class="project-img" loading="lazy" width="300" height="180" />
         <h3>🌙 DreamSynth</h3>
         <p>AI-powered dream journaling, emotion tracking & narrated sleep stories.</p>
         <a href="https://will11521.github.io/dreamsynth-frontend/" target="_blank" rel="noopener noreferrer">Experience</a>
@@ -128,7 +132,7 @@
     </div>
     <button id="calendlyToggle">Book a Call</button>
     <div id="calendlyContainer" class="hidden">
-      <iframe src="https://calendly.com/williamjeetsingh2004" frameborder="0"></iframe>
+      <iframe data-src="https://calendly.com/williamjeetsingh2004" frameborder="0" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" allow="fullscreen"></iframe>
     </div>
   </section>
   </main>
