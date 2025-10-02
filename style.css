@@ -349,8 +349,7 @@ body {
   bottom: 30px;
   right: 30px;
   z-index: 9999;
-  content-visibility: auto;
-  contain-intrinsic-size: 70px 70px;
+  overflow: visible;
 }
 
 #nerve-toggle {

@@ -28,7 +28,7 @@
   <meta name="theme-color" content="#a07156" />
   
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src https://calendly.com https://*.calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://cdn.jsdelivr.net 'sha256-X9GDqRRetOFy2BWT1H0sTTq1RL/M5tbSakFf3mPe0w0=' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline'; connect-src 'self' https://cdn.jsdelivr.net; frame-src https://calendly.com https://*.calendly.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
   
   <link rel="stylesheet" href="style.css" />
   
@@ -78,11 +78,7 @@
     <h2>Featured Work</h2>
     <div class="project-grid">
       <div class="project">
-        <picture>
-          <source srcset="assets/analytics.webp" type="image/webp">
-          <source srcset="assets/analytics.avif" type="image/avif">
-          <img src="assets/analytics.png" alt="Analytics Dashboard Screenshot" class="project-img" loading="lazy" width="300" height="180" />
-        </picture>
+        <img src="assets/analytics.png" alt="Analytics Dashboard Screenshot" class="project-img" loading="lazy" width="300" height="180" />
         <h3>🧠 Analytics Dashboard</h3>
         <p>Real-time merchant insights powered by logic and lore.</p>
         <a href="https://will11521.github.io/analytics-by-william/" target="_blank" rel="noopener noreferrer">Launch</a>
@@ -132,7 +128,7 @@
     </div>
     <button id="calendlyToggle">Book a Call</button>
     <div id="calendlyContainer" class="hidden">
-      <iframe data-src="https://calendly.com/williamjeetsingh2004" frameborder="0" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" allow="fullscreen"></iframe>
+      <iframe data-src="https://calendly.com/williamjeetsingh2004" frameborder="0" loading="lazy" sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox" allow="fullscreen"></iframe>
     </div>
   </section>
   </main>

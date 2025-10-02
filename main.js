@@ -1,7 +1,5 @@
 // === MAIN.JS ===
 import gsap from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/+esm';
-import ScrollTrigger from 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/ScrollTrigger.min.js';
-gsap.registerPlugin(ScrollTrigger);
 
 // ... (previous animations skipped for brevity)
 
@@ -11,14 +9,16 @@ const nerveChat = document.getElementById("nerve-chat");
 const nerveInput = document.getElementById("nerve-input");
 const nerveMessages = document.getElementById("nerve-messages");
 
-nerveBtn.addEventListener("click", () => {
-  nerveChat.classList.toggle("visible");
-  nerveInput.focus();
-});
+if (nerveBtn && nerveChat && nerveInput && nerveMessages) {
+  nerveBtn.addEventListener("click", () => {
+    nerveChat.classList.toggle("visible");
+    nerveInput.focus();
+  });
 
-nerveChat.addEventListener("click", () => {
-  nerveInput.focus();
-});
+  nerveChat.addEventListener("click", () => {
+    nerveInput.focus();
+  });
+}
 
 // === Calendly Deferred Loading ===
 const calendlyToggle = document.getElementById("calendlyToggle");
@@ -27,18 +27,20 @@ const calendlyIframe = document.querySelector("#calendlyContainer iframe");
 
 let calendlyLoaded = false;
 
-calendlyToggle.addEventListener("click", () => {
-  calendlyContainer.classList.toggle("visible");
-  
-  // Load Calendly only on first click
-  if (!calendlyLoaded && calendlyIframe) {
-    const dataSrc = calendlyIframe.getAttribute("data-src");
-    if (dataSrc) {
-      calendlyIframe.src = dataSrc;
-      calendlyLoaded = true;
+if (calendlyToggle && calendlyContainer) {
+  calendlyToggle.addEventListener("click", () => {
+    calendlyContainer.classList.toggle("visible");
+    
+    // Load Calendly only on first click
+    if (!calendlyLoaded && calendlyIframe) {
+      const dataSrc = calendlyIframe.getAttribute("data-src");
+      if (dataSrc) {
+        calendlyIframe.src = dataSrc;
+        calendlyLoaded = true;
+      }
     }
-  }
-});
+  });
+}
 
 function typeLikeGPT(text, container) {
   let index = 0;
@@ -52,26 +54,27 @@ function typeLikeGPT(text, container) {
   }, 20);
 }
 
-nerveInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && nerveInput.value.trim() !== "") {
-    const msg = nerveInput.value.trim();
-    const userMsg = document.createElement("div");
-    userMsg.className = "nerve-msg user";
-    userMsg.textContent = msg;
-    nerveMessages.appendChild(userMsg);
-    nerveInput.value = "";
+if (nerveInput && nerveMessages) {
+  nerveInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && nerveInput.value.trim() !== "") {
+      const msg = nerveInput.value.trim();
+      const userMsg = document.createElement("div");
+      userMsg.className = "nerve-msg user";
+      userMsg.textContent = msg;
+      nerveMessages.appendChild(userMsg);
+      nerveInput.value = "";
 
-    const loadingMsg = document.createElement("div");
-    loadingMsg.className = "nerve-msg ai";
-    loadingMsg.textContent = "...";
-    nerveMessages.appendChild(loadingMsg);
-    nerveMessages.scrollTop = nerveMessages.scrollHeight;
+      const loadingMsg = document.createElement("div");
+      loadingMsg.className = "nerve-msg ai";
+      loadingMsg.textContent = "...";
+      nerveMessages.appendChild(loadingMsg);
+      nerveMessages.scrollTop = nerveMessages.scrollHeight;
 
-    setTimeout(() => {
-      loadingMsg.remove();
-      const responseEl = document.createElement("div");
-      responseEl.className = "nerve-msg ai";
-      let lowerMsg = msg.toLowerCase().trim();
+      setTimeout(() => {
+        loadingMsg.remove();
+        const responseEl = document.createElement("div");
+        responseEl.className = "nerve-msg ai";
+        let lowerMsg = msg.toLowerCase().trim();
       
       // Intent parsing rules
       let intent = "unknown";
@@ -260,27 +263,20 @@ nerveInput.addEventListener("keydown", (e) => {
       }
     }, 700);
   }
-});
-
-// Animate NERVE Glow (GPU-optimized)
-gsap.to("#nerve-toggle .orb-face::before", {
-  scale: 1.2,
-  opacity: 0.8,
-  duration: 2,
-  repeat: -1,
-  yoyo: true,
-  ease: "power1.inOut"
-});
+  });
+}
 
 // Entry Pop
 window.addEventListener("DOMContentLoaded", () => {
-  gsap.from("#nerve-toggle", {
-    scale: 0.4,
-    opacity: 0,
-    ease: "back.out(1.7)",
-    duration: 1.2,
-    delay: 1.3
-  });
+  if (document.querySelector("#nerve-toggle")) {
+    gsap.from("#nerve-toggle", {
+      scale: 0.4,
+      opacity: 0,
+      ease: "back.out(1.7)",
+      duration: 1.2,
+      delay: 1.3
+    });
+  }
 });
 
 // Eye Tracking
@@ -289,6 +285,8 @@ const rightEye = document.querySelector('.right-eye');
 
 document.addEventListener('mousemove', (e) => {
   const orb = document.getElementById('nerve-toggle');
+  if (!leftEye || !rightEye || !orb) return;
+
   const rect = orb.getBoundingClientRect();
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
