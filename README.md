@@ -1,6 +1,6 @@
 # Williamjeet Singh - Portfolio
 
-Cinematic 3D portfolio site powered by Vite + React, Motion, and a custom "Nerve" AI assistant trained on my resume and project data.
+Portfolio site powered by Vite + React, Motion, and a custom "Nerve" AI assistant trained on my resume and project data.
 
 ## Local development
 
