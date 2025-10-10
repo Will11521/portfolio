@@ -42,7 +42,7 @@ export function Footer() {
             </a>
             <span className="text-border">•</span>
             <a 
-              href="https://github.com/williamjeet"
+              href="https://github.com/Will11521"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"

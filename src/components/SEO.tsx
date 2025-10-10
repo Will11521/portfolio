@@ -78,7 +78,7 @@ export function SEO({
       url: url,
       sameAs: [
         'https://www.linkedin.com/in/williamjeet-singh/',
-        'https://github.com/williamjeet'
+        'https://github.com/Will11521'
       ],
       description: description,
       image: image,
