@@ -172,31 +172,6 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Footer */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="pt-12 border-t border-primary/10"
-          >
-            <p className="text-muted-foreground" style={{ fontSize: '0.95rem' }}>
-              © {new Date().getFullYear()} William. Crafted with caffeine & CSS.
-            </p>
-            <motion.p
-              className="text-muted-foreground/60 mt-2"
-              style={{ fontSize: '0.85rem' }}
-              animate={{
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-              }}
-            >
-              Find me on <a href="mailto:williamjeetsingh2004@gmail.com" className="hover:text-primary transition-colors">Email</a> · <a href="https://calendly.com/williamjeetsingh2004" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Book Call</a> · <a href="https://linkedin.com/in/williamjeetsingh2004" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
-            </motion.p>
-          </motion.div>
         </motion.div>
       </div>
 
