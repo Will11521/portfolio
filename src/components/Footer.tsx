@@ -20,10 +20,9 @@ export function Footer() {
         >
           {/* Copyright */}
           <p className="text-muted-foreground flex items-center justify-center gap-2" style={{ fontSize: '0.95rem' }}>
-            <span>© {currentYear} Williamjeet Singh.</span>
-            <span className="hidden sm:inline">Crafted with</span>
-            <Heart className="w-4 h-4 text-primary fill-primary animate-pulse" aria-label="love" />
-            <span className="hidden sm:inline">and lots of coffee</span>
+            © {currentYear} Williamjeet Singh. Crafted with caffeine{' '}
+            <Heart className="w-4 h-4 text-primary fill-primary animate-pulse" aria-label="love" />{' '}
+            CSS.
           </p>
 
           {/* Tech Stack Credit */}
