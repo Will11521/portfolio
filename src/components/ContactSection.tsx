@@ -149,7 +149,7 @@ export function ContactSection() {
               {[
                 { icon: Mail, href: 'mailto:williamjeetsingh2004@gmail.com', label: 'Email' },
                 { icon: Calendar, href: 'https://calendly.com/williamjeetsingh2004', label: 'Book Call' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/williamjeetsingh2004', label: 'LinkedIn' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/williamjeetsingh2004', label: 'LinkedIn' },
               ].map((social, index) => (
                 <motion.a
                   key={social.label}

@@ -77,7 +77,7 @@ export function SEO({
       jobTitle: 'Designer, Developer & Creative Technologist',
       url: url,
       sameAs: [
-        'https://www.linkedin.com/in/williamjeet-singh/',
+        'https://www.linkedin.com/in/williamjeetsingh2004',
         'https://github.com/Will11521'
       ],
       description: description,
