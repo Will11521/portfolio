@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useState } from 'react';
-import dreamSynthImage from 'figma:asset/2f330bddd036cf2d5c3445fa38bf37583f21d4d9.png';
+import dreamSynthImage from '@/assets/dream.png';
 import analyticsImage from 'figma:asset/de470b66222bd4c4058d6410ac42ecc7eaf3144e.png';
 import echoLinkImage from 'figma:asset/d395890a254ffe6bc653dd681c99a755400dfe3a.png';
 import theSystemImage from 'figma:asset/34ebc99fc30221736308ed1bc3e433a09b577f94.png';
@@ -50,7 +50,7 @@ const projects: Project[] = [
     gradient: "from-purple-400/20 to-pink-400/20",
     icon: "🌙",
     image: dreamSynthImage,
-    link: "https://will11521.github.io/dreamsynth-frontend/"
+    link: "https://dreamsynth.live/"
   }
 ];
 

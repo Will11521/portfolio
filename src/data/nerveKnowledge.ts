@@ -88,7 +88,7 @@ export const knowledgeBase: KnowledgeBase = {
         "Designed intuitive journaling interface",
         "Implemented secure user authentication"
       ],
-      link: "https://will11521.github.io/dreamsynth-frontend/",
+      link: "https://dreamsynth.live/",
       keywords: ["dreamsynth", "dream", "sleep", "journal", "ai"]
     },
     {
