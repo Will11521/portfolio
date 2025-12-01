@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -14,8 +15,35 @@ import { SkipNavigation } from './components/SkipNavigation';
 import { PerformanceOptimizer } from './components/PerformanceOptimizer';
 import { Analytics } from './components/Analytics';
 import { ManifestGenerator } from './components/ManifestGenerator';
+import { NavigationBar, PageKey } from './components/NavigationBar';
+
+const allowedPages: PageKey[] = ['home', 'about', 'portfolio', 'contact'];
+
+const parseHashToPage = (): PageKey => {
+  if (typeof window === 'undefined') return 'home';
+  const hashValue = window.location.hash.replace('#', '').replace('/', '');
+  return allowedPages.includes(hashValue as PageKey) ? (hashValue as PageKey) : 'home';
+};
 
 export default function App() {
+  const [page, setPage] = useState<PageKey>(() => parseHashToPage());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setPage(parseHashToPage());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const navigateToPage = (target: PageKey) => {
+    window.location.hash = target === 'home' ? '' : `/${target}`;
+    setPage(target);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <SEO />
@@ -25,15 +53,29 @@ export default function App() {
       <SkipNavigation />
       <div className="relative w-full">
         <CustomCursor />
+        <NavigationBar currentPage={page} onNavigate={navigateToPage} />
         <ScrollProgress />
-        <main role="main">
-          <HeroSection />
-          <AboutSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <ResumeSection />
-          <FunFactsSection />
-          <ContactSection />
+        <main id="main-content" role="main">
+          {page === 'home' && (
+            <HeroSection />
+          )}
+
+          {page === 'about' && (
+            <>
+              <AboutSection />
+              <SkillsSection />
+              <ResumeSection />
+              <FunFactsSection />
+            </>
+          )}
+
+          {page === 'portfolio' && (
+            <ProjectsSection />
+          )}
+
+          {page === 'contact' && (
+            <ContactSection />
+          )}
         </main>
         <Footer />
         <NerveChatbot />

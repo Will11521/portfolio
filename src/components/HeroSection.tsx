@@ -14,7 +14,7 @@ export function HeroSection() {
 
   return (
     <section 
-      id="main-content"
+      id="hero"
       ref={sectionRef}
       className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{ background: 'linear-gradient(135deg, #F5F1EB 0%, #E8DED0 100%)' }}
@@ -147,8 +147,7 @@ export function HeroSection() {
               fontWeight: 500,
             }}
             onClick={() => {
-              const projectsSection = document.getElementById('projects');
-              projectsSection?.scrollIntoView({ behavior: 'smooth' });
+              window.location.hash = '/portfolio';
             }}
           >
             View Projects
@@ -163,8 +162,7 @@ export function HeroSection() {
               fontWeight: 500,
             }}
             onClick={() => {
-              const contactSection = document.getElementById('contact');
-              contactSection?.scrollIntoView({ behavior: 'smooth' });
+              window.location.hash = '/contact';
             }}
           >
             Get in Touch
