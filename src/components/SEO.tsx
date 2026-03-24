@@ -8,8 +8,8 @@ interface SEOProps {
 }
 
 export function SEO({ 
-  title = 'Williamjeet Singh - Designer, Developer & Creative Technologist',
-  description = 'Portfolio of Williamjeet Singh, a designer, developer, and creative technologist crafting digital experiences with Apple-level motion fluidity and BMW-style storytelling.',
+  title = 'Williamjeet Singh - Design Meets Data | Web Developer & GTM Specialist',
+  description = 'Portfolio of Williamjeet Singh, a web developer and GTM specialist focused on UX, SEO, visual intelligence, AI, and analytics-driven digital experiences.',
   image = 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=630&fit=crop',
   url = 'https://williamdev.is-a.dev'
 }: SEOProps) {
@@ -17,12 +17,14 @@ export function SEO({
   useEffect(() => {
     // Update title
     document.title = title;
+    document.querySelector('meta[name="apple-mobile-web-app-capable"]')?.remove();
+    document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.remove();
     
     // Update meta tags
     const metaTags = [
       { name: 'description', content: description },
       { name: 'author', content: 'Williamjeet Singh' },
-      { name: 'keywords', content: 'Williamjeet Singh, designer, developer, creative technologist, portfolio, web development, UI/UX, motion design' },
+      { name: 'keywords', content: 'Williamjeet Singh, web developer, GTM specialist, UX, SEO, AI, analytics, digital marketing, portfolio' },
       
       // Open Graph / Facebook
       { property: 'og:type', content: 'website' },
@@ -41,8 +43,7 @@ export function SEO({
       // Mobile optimization
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
       { name: 'theme-color', content: '#8B7355' },
-      { name: 'apple-mobile-web-app-capable', content: 'yes' },
-      { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+      { name: 'mobile-web-app-capable', content: 'yes' },
     ];
 
     metaTags.forEach(({ name, property, content }) => {
@@ -74,7 +75,7 @@ export function SEO({
       '@type': 'Person',
       name: 'Williamjeet Singh',
       alternateName: 'William Singh',
-      jobTitle: 'Designer, Developer & Creative Technologist',
+      jobTitle: 'Web Developer & GTM Specialist',
       url: url,
       sameAs: [
         'https://www.linkedin.com/in/williamjeetsingh2004',
@@ -85,17 +86,19 @@ export function SEO({
       knowsAbout: [
         'Web Development',
         'UI/UX Design',
+        'SEO',
+        'Google Tag Manager',
+        'Artificial Intelligence',
+        'Analytics',
         'React',
         'Next.js',
-        'TypeScript',
-        'Motion Design',
-        'Figma',
-        'Frontend Development'
+        'Python',
+        'Figma'
       ],
       hasOccupation: {
         '@type': 'Occupation',
         name: 'Web Developer',
-        skills: 'React, Next.js, TypeScript, Python, Figma, UI/UX Design'
+        skills: 'Web Development, GTM, SEO, UX, Python, Analytics, Figma'
       }
     };
 

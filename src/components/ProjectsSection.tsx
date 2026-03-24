@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useState } from 'react';
 import dreamSynthImage from '@/assets/dream.png';
 import analyticsImage from 'figma:asset/de470b66222bd4c4058d6410ac42ecc7eaf3144e.png';
-import echoLinkImage from 'figma:asset/d395890a254ffe6bc653dd681c99a755400dfe3a.png';
+import echoLinkImage from '@/assets/d395890a254ffe6bc653dd681c99a755400dfe3a.png';
 import theSystemImage from 'figma:asset/34ebc99fc30221736308ed1bc3e433a09b577f94.png';
 
 interface Project {

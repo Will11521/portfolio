@@ -48,32 +48,32 @@ export interface KnowledgeBase {
 export const knowledgeBase: KnowledgeBase = {
   personal: {
     name: "Williamjeet Singh",
-    title: "Designer, Developer & Creative Technologist",
-    location: "Ottawa, Ontario, Canada",
-    education: "Self-taught designer & developer with relentless curiosity and 72-hour redesign marathons",
-    bio: "Designer, developer, and accidental therapist. I build digital experiences that feel like quiet conversations, not flashy lectures. My work combines technical mastery with deep empathy — creating calming interfaces with clever code. I believe in emotionally intelligent design where every interface tells a story worth experiencing.",
+    title: "Design Meets Data | Web Developer & GTM Specialist | UX, SEO & Visual Intelligence",
+    location: "Nepean, Ontario, Canada",
+    education: "Interactive Media Design, Algonquin College of Applied Arts and Technology (Jan 2024 - Apr 2026)",
+    bio: "I build things that think. My work sits at the point where AI, design, and code start to feel alive. I use tools like Python, Flask, GPT, JavaScript, and analytics systems to create interfaces and experiences that understand people — not just respond to them. I'm obsessed with how data can show emotion, how interfaces can predict behavior, and how AI can quietly improve the way we work or feel online. My toolkit covers web development, UX, data visualization, GTM and SEO, but my real skill is connecting logic with intuition — turning raw systems into something that feels intelligent. Always exploring how technology can think deeper and feel closer to human.",
   },
   
   skills: {
     frontend: [
-      "HTML", "CSS", "JavaScript", "React", "Next.js", "TypeScript", 
-      "Tailwind CSS", "Motion/Framer Motion", "Vue.js", "Fetch API", "Responsive Design"
+      "Web Development", "HTML", "CSS", "JavaScript", "React", "Next.js", "TypeScript",
+      "Tailwind CSS", "Responsive Design", "User Experience Design (UED)"
     ],
     backend: [
-      "Python", "Flask", "Node.js", "FastAPI", "Supabase", "MongoDB",
-      "RESTful APIs", "Socket.io", "Express.js"
+      "Python", "Flask", "Node.js", "FastAPI", "MongoDB",
+      "RESTful APIs", "Socket.io", "Express.js", "GPT"
     ],
     design: [
-      "Figma", "Canva", "Adobe XD", "Prototyping", "Wireframing",
-      "UI/UX Design", "Design Systems", "Motion Design", "Typography"
+      "Design", "Figma", "Canva", "Graphic Design", "Prototyping", "Wireframing",
+      "UX Research", "UI/UX Design", "Visual Intelligence"
     ],
     aiml: [
-      "Python", "Flask", "TextBlob", "GPT integration", "OpenAI API",
-      "TensorFlow", "LangChain", "Natural Language Processing", "AI Integration"
+      "Artificial Intelligence (AI)", "Python", "Flask", "TextBlob", "GPT",
+      "OpenAI API", "Natural Language Processing", "AI Integration"
     ],
     tools: [
-      "Git/GitHub", "Google Analytics", "GTM", "Looker Studio", "SEO",
-      "VS Code", "Notion", "Vercel", "Chrome DevTools", "Postman"
+      "Google Analytics", "Google Tag Manager", "SEO", "Business Analytics", "Digital Marketing",
+      "Git/GitHub", "VS Code", "Looker Studio", "Canva", "Postman"
     ]
   },
 
@@ -159,36 +159,46 @@ export const knowledgeBase: KnowledgeBase = {
 
   experience: [
     {
+      role: "Manager of Sales",
+      company: "WirelessPlus",
+      period: "Sep 2025 - Present",
+      achievements: [
+        "Diagnose and repair smartphones, including screen replacements, battery replacements, charging ports, and hardware issues",
+        "Configure devices, perform data transfers, and troubleshoot software and connectivity problems",
+        "Sell and activate smartphones, wireless plans, and accessories",
+        "Manage transactions, inventory, and customer service in a fast-paced retail environment"
+      ]
+    },
+    {
       role: "AI Intern",
       company: "Square Root Technologies Inc.",
       period: "Mar 2025 - May 2025",
       achievements: [
-        "Developed AI-powered business intelligence prototypes using Python, Flask, and TextBlob",
-        "Designed UI dashboards and integrated external BI platforms for data-driven insights",
-        "Automated decision-support tools to improve merchant engagement and sales strategies",
-        "Completed AI-Driven Customer Service Enhancement certification through Riipen"
+        "Collaborated with the team to develop an AI-driven business intelligence tool",
+        "Created front-end UI prototypes and interactive dashboards for internal analytics",
+        "Integrated insights from external BI platforms into tailored solutions",
+        "Assisted with insight automation, sales pattern recognition and emotion analysis using Python, Flask and TextBlob",
+        "Focused on designing seamless user flows for complex AI outputs"
       ]
     },
     {
-      role: "Supervisor",
+      role: "Shift Lead",
       company: "Booster Juice",
-      period: "Mar 2024 - Present",
+      period: "Mar 2024 - Dec 2025",
       achievements: [
-        "Supervised shifts and led a team during peak operations in Ottawa, ON",
-        "Managed scheduling, delegation, and conflict resolution",
-        "Enhanced leadership, communication, and problem-solving skills in a fast-paced environment",
-        "Maintained high team morale and customer satisfaction"
+        "Led a team of up to 6 staff during peak operations, ensuring smooth workflow and exceptional customer service",
+        "Fostered clear communication and resolved issues quickly to maintain productivity",
+        "Developed leadership, multitasking and conflict-resolution skills in a fast-paced environment"
       ]
     },
     {
       role: "Social Media Manager",
       company: "Brazily Fitness Inc.",
-      period: "Mar 2024 - June 2024",
+      period: "Mar 2024 - Jun 2024",
       achievements: [
-        "Managed Instagram & Facebook content creation; boosted engagement by 30%",
-        "Designed branded graphics and campaigns aligned with brand identity",
-        "Collaborated directly with the founder to refine digital marketing strategy",
-        "Completed Social Media Strategic Engagement certification through Riipen"
+        "Managed Instagram and Facebook channels, planning and scheduling posts using Canva",
+        "Developed themed content campaigns that boosted engagement by 30%",
+        "Collaborated directly with the founder to maintain a consistent brand voice and respond to audience feedback"
       ]
     }
   ],
@@ -196,9 +206,9 @@ export const knowledgeBase: KnowledgeBase = {
   resume: {
     url: "/Williamjeet%20Singh.pdf",
     summary: [
-      "Designer & developer blending cinematic storytelling with engineering discipline.",
-      "Current AI Intern at Square Root Technologies building AI-powered decision-support prototypes.",
-      "Leadership and marketing experience from Booster Juice and Brazily Fitness with measurable impact."
+      "Manager of Sales at WirelessPlus with hands-on device repair, wireless sales, inventory, and customer service experience.",
+      "Former Artificial Intelligence Intern at Square Root Technologies, building AI-driven business intelligence workflows with Python, Flask, and TextBlob.",
+      "Experience across shift leadership at Booster Juice and digital marketing at Brazily Fitness with measurable engagement impact."
     ]
   },
 
@@ -225,7 +235,7 @@ export const knowledgeBase: KnowledgeBase = {
     "I think better with Booster Juice in hand. Brain fuel? Maybe.",
     "Lo-fi + midnight = design zone. That's the rule.",
     "I once spent 72 hours redesigning my entire portfolio... then did it again. Perfectionism runs deep.",
-    "Often called an 'accidental therapist' — turns out designing calm spaces attracts deep conversations.",
+    "I stay curious about how interfaces, data, and AI can work together in more human ways.",
     "I build digital experiences that feel like quiet conversations, not flashy lectures.",
     "Calming interfaces, clever code, and the occasional late-night Figma binge — that's my vibe."
   ],
@@ -241,7 +251,7 @@ export const knowledgeBase: KnowledgeBase = {
     email: "Williamjeetsingh2004@gmail.com",
     phone: "+1 437-872-1500",
     website: "https://williamdev.is-a.dev/",
-    location: "Ottawa, Ontario, Canada",
+    location: "Nepean, Ontario, Canada",
     calendly: "https://calendly.com/williamjeetsingh2004"
   }
 };
@@ -275,10 +285,10 @@ export const responsePatterns = {
   experience: {
     triggers: ["experience", "background", "education", "study", "school", "college", "learn", "work", "job", "intern"],
     responses: [
-      `William is a self-taught creative technologist who's currently an AI Intern at Square Root Technologies, developing AI-powered business intelligence prototypes! He believes in learning by doing — and redesigning... and redesigning again.`,
-      `He has diverse experience: AI Intern at Square Root Technologies (working with Python, Flask, TextBlob), Supervisor at Booster Juice (leadership), and Social Media Manager at Brazily Fitness (boosted engagement by 30%).`,
-      `William is self-taught with an obsessive attention to detail. He once spent 72 hours redesigning his portfolio... twice. He's gained real-world experience in AI development, team leadership, and digital marketing.`,
-      `His background includes hands-on tech experience as an AI Intern at Square Root Technologies, leadership at Booster Juice, and social media management at Brazily Fitness. He's a relentless learner who thrives on creative challenges.`
+      `William currently works as Manager of Sales at WirelessPlus, and his recent background also includes an AI internship at Square Root Technologies, shift leadership at Booster Juice, and social media management at Brazily Fitness.`,
+      `He has diverse experience across mobile hardware repair and wireless sales, AI-driven business intelligence, team leadership, and digital marketing.`,
+      `His background combines customer-facing retail execution at WirelessPlus, AI product work at Square Root Technologies, leadership at Booster Juice, and growth-focused content work at Brazily Fitness.`,
+      `William is studying Interactive Media Design at Algonquin College while building experience across web, AI, analytics, sales, and marketing.`
     ]
   },
 
@@ -295,7 +305,7 @@ export const responsePatterns = {
   personality: {
     triggers: ["who", "about", "personality", "like", "person", "character"],
     responses: [
-      `${knowledgeBase.personal.bio} He's also known as an 'Accidental Therapist' because he genuinely cares about the people he works with!`,
+      knowledgeBase.personal.bio,
       "William is a creative problem-solver who loves pushing the boundaries of what's possible on the web. He's detail-oriented, collaborative, and always experimenting with new ideas.",
       "He's passionate about creating experiences that feel magical. Whether it's smooth animations, intelligent AI features, or thoughtful UX design, he sweats the details."
     ]
@@ -305,7 +315,7 @@ export const responsePatterns = {
     triggers: ["interest", "hobby", "passion", "enjoy", "fun", "outside", "fact", "personal"],
     responses: [
       `${knowledgeBase.funFacts[0]} He's also a big fan of lo-fi music, late-night design sessions, and his golden lab back in India!`,
-      `Fun fact: ${knowledgeBase.funFacts[2]} He also studied psychology at Yale to better understand user behavior!`,
+      `Fun fact: ${knowledgeBase.funFacts[2]} He also spends a lot of time thinking about how data, emotion, and design connect.`,
       `${knowledgeBase.funFacts[7]} Plus, he thinks better with Booster Juice in hand and lo-fi music playing!`,
       `William believes in emotionally intelligent design. His interests include ${knowledgeBase.interests.slice(0, 3).join(", ")}, and ${knowledgeBase.interests.slice(8, 10).join(", ")}.`
     ]
@@ -314,7 +324,7 @@ export const responsePatterns = {
   design: {
     triggers: ["design", "ui", "ux", "interface", "visual", "aesthetic", "style", "figma"],
     responses: [
-      `William specializes in cinematic web design with Apple-level polish. He uses tools like ${knowledgeBase.skills.design.slice(0, 4).join(", ")} to create stunning interfaces.`,
+      `William works across design, UX, and visual intelligence. He uses tools like ${knowledgeBase.skills.design.slice(1, 5).join(", ")} to create interfaces that feel intentional and intelligent.`,
       "His design philosophy centers on motion, depth, and intuitive interactions. He believes every pixel and animation should serve a purpose.",
       "William creates design systems that scale. From typography to motion patterns, he thinks holistically about user experience."
     ]
@@ -323,8 +333,8 @@ export const responsePatterns = {
   ai: {
     triggers: ["ai", "artificial intelligence", "machine learning", "ml", "gpt", "openai", "nerve", "textblob", "flask"],
     responses: [
-      `William is currently an AI Intern at Square Root Technologies! He's developed AI-powered business intelligence prototypes using Python, Flask, and TextBlob. Plus, he built me (Nerve)!`,
-      `He's passionate about AI/ML. At Square Root Technologies, he automated decision-support tools and integrated BI platforms. He also works with ${knowledgeBase.skills.aiml.slice(0, 4).join(", ")}.`,
+      `William previously interned at Square Root Technologies, where he helped develop an AI-driven business intelligence tool using Python, Flask, and TextBlob. Plus, he built me (Nerve)!`,
+      `He's passionate about AI/ML. During his Square Root Technologies internship, he worked on dashboards, BI integration, and automation. He also works with ${knowledgeBase.skills.aiml.slice(0, 4).join(", ")}.`,
       "AI/ML is central to his work. From business intelligence automation to GPT integration in projects like DreamSynth, he uses AI to solve real-world problems.",
       "William has hands-on AI experience through his internship at Square Root Technologies, where he designed UI dashboards and built AI prototypes for merchant engagement."
     ]
@@ -351,9 +361,9 @@ export const responsePatterns = {
   leadership: {
     triggers: ["leadership", "team", "manage", "supervisor", "lead", "collaboration"],
     responses: [
-      "William has hands-on leadership experience as a Supervisor at Booster Juice, where he managed shifts, scheduling, delegation, and conflict resolution during peak operations.",
-      "He's developed strong leadership skills through supervising teams at Booster Juice and collaborating with founders at Brazily Fitness. He excels at communication and problem-solving.",
-      "Leadership is one of his strengths! He's supervised teams in fast-paced environments, managed social media campaigns directly with company founders, and led collaborative design projects."
+      "William has hands-on leadership experience as a Shift Lead at Booster Juice, where he led teams during peak operations and kept service running smoothly.",
+      "He's developed strong leadership skills through shift leadership at Booster Juice, sales responsibility at WirelessPlus, and direct collaboration with founders at Brazily Fitness.",
+      "Leadership is one of his strengths. His experience spans retail operations, customer service, team coordination, and collaborative project work."
     ]
   },
 
