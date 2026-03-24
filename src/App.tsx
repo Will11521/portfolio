@@ -336,6 +336,7 @@ export default function App() {
 
   useGSAP(
     () => {
+      const isMobileLayout = window.matchMedia('(max-width: 820px)').matches;
       const heroChars = gsap.utils.toArray<HTMLElement>('.hero-char');
       const subtitle = document.querySelector('.hero-panel-primary .hero-subtitle');
       const actions = document.querySelector('.hero-actions');
@@ -385,7 +386,7 @@ export default function App() {
         heroTimeline.play(0);
       }
 
-      if (heroPrimaryPanel && heroSecondaryPanel && heroBackground) {
+      if (!isMobileLayout && heroPrimaryPanel && heroSecondaryPanel && heroBackground) {
         gsap.set(heroSecondaryPanel, { opacity: 0, y: 80 });
 
         const heroScrollTimeline = gsap.timeline({
@@ -443,6 +444,11 @@ export default function App() {
             },
             0.7,
           );
+      } else if (heroSecondaryPanel && heroPrimaryPanel) {
+        gsap.set(heroPrimaryPanel, { clearProps: 'all' });
+        gsap.set(heroSecondaryPanel, { clearProps: 'all', opacity: 1, y: 0 });
+        gsap.set(heroBackground, { clearProps: 'transform,filter' });
+        gsap.set(scrollIndicator, { clearProps: 'all' });
       }
 
       ScrollTrigger.create({

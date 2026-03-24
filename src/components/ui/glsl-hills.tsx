@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import * as THREE from 'three';
 import { cn } from '@/components/ui/utils';
 
@@ -178,8 +178,29 @@ const GLSLHills = ({
 }: GLSLHillsProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [useFallback, setUseFallback] = useState(false);
 
   useEffect(() => {
+    const evaluateMode = () => {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const narrowViewport = window.innerWidth <= 820;
+      const weakDevice = (navigator.hardwareConcurrency ?? 8) <= 4;
+      setUseFallback(reducedMotion || narrowViewport || weakDevice);
+    };
+
+    evaluateMode();
+    window.addEventListener('resize', evaluateMode);
+
+    return () => {
+      window.removeEventListener('resize', evaluateMode);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (useFallback) {
+      return undefined;
+    }
+
     const canvas = canvasRef.current;
     const container = containerRef.current;
 
@@ -231,25 +252,29 @@ const GLSLHills = ({
       plane.dispose();
       renderer.dispose();
     };
-  }, [cameraZ, planeSize, speed]);
+  }, [cameraZ, planeSize, speed, useFallback]);
 
   return (
     <div
       ref={containerRef}
-      className={cn('relative isolate overflow-hidden', className)}
+      className={cn('glsl-hills-shell relative isolate overflow-hidden', className, useFallback && 'is-fallback')}
       style={{ width, height }}
     >
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          width: '100%',
-          height: '100%',
-        }}
-      />
-      {children ? <div className="absolute inset-0 z-10">{children}</div> : null}
+      {useFallback ? <div className="glsl-hills-fallback" aria-hidden="true" /> : null}
+      {!useFallback ? (
+        <canvas
+          ref={canvasRef}
+          className="glsl-hills-canvas"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 1,
+            width: '100%',
+            height: '100%',
+          }}
+        />
+      ) : null}
+      {children ? <div className="glsl-hills-content">{children}</div> : null}
     </div>
   );
 };
