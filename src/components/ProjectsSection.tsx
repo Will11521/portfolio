@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import dreamSynthImage from '@/assets/dream.png';
 import analyticsImage from 'figma:asset/de470b66222bd4c4058d6410ac42ecc7eaf3144e.png';
 import theSystemImage from 'figma:asset/34ebc99fc30221736308ed1bc3e433a09b577f94.png';
+import wyngaardenImage from '@/assets/wyngaarden.png';
 
 interface Project {
   title: string;
@@ -30,6 +31,7 @@ const projects: Project[] = [
     tech: ["HTML", "CSS", "JavaScript", "Square Online"],
     gradient: "from-yellow-400/20 to-orange-400/20",
     icon: "🥐",
+    image: wyngaardenImage,
     link: "https://www.wyngaardenpastriesandartisanbread.com/"
   },
   {
