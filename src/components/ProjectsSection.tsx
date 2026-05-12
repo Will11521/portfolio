@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef, useState } from 'react';
 import dreamSynthImage from '@/assets/dream.png';
 import analyticsImage from 'figma:asset/de470b66222bd4c4058d6410ac42ecc7eaf3144e.png';
-import echoLinkImage from '@/assets/d395890a254ffe6bc653dd681c99a755400dfe3a.png';
 import theSystemImage from 'figma:asset/34ebc99fc30221736308ed1bc3e433a09b577f94.png';
 
 interface Project {
@@ -26,13 +25,12 @@ const projects: Project[] = [
     link: "https://will11521.github.io/analytics-by-william/"
   },
   {
-    title: "🗣 EchoLink",
-    description: "Silent communication with AI lip reading + gestures.",
-    tech: ["React", "Node.js", "Socket.io", "MongoDB"],
-    gradient: "from-green-400/20 to-emerald-400/20",
-    icon: "🗣",
-    image: echoLinkImage,
-    link: "https://www.figma.com/proto/qtE2hczc0tLQzhd4pDeMxG/Untitled?node-id=2-37&starting-point-node-id=2%3A37&t=KmthzfmRmQi5DxKm-1"
+    title: "🥐 Wyngaarden Pastries",
+    description: "Full client website for an Ottawa artisan bakery — built during Applied Projects with real stakeholder requirements.",
+    tech: ["HTML", "CSS", "JavaScript", "Square Online"],
+    gradient: "from-yellow-400/20 to-orange-400/20",
+    icon: "🥐",
+    link: "https://www.wyngaardenpastriesandartisanbread.com/"
   },
   {
     title: "🌌 The System",
