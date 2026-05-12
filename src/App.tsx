@@ -123,12 +123,12 @@ const PROJECTS = [
     link: 'https://will11521.github.io/analytics-by-william/',
   },
   {
-    title: '🗣 EchoLink',
-    stack: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+    title: '🥐 Wyngaarden Pastries',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Square Online'],
     description:
-      'Silent communication with AI lip reading + gestures.',
-    image: '/images/project-echolink.png',
-    link: 'https://www.figma.com/proto/qtE2hczc0tLQzhd4pDeMxG/Untitled?node-id=2-37&starting-point-node-id=2%3A37',
+      'Full client website for an Ottawa artisan bakery — built during Applied Projects with real stakeholder requirements.',
+    image: '/images/wyngaarden.png',
+    link: 'https://www.wyngaardenpastriesandartisanbread.com/',
   },
   {
     title: '🌌 The System',
