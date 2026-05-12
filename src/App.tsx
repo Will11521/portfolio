@@ -127,7 +127,7 @@ const PROJECTS = [
     stack: ['HTML', 'CSS', 'JavaScript', 'Square Online'],
     description:
       'Full client website for an Ottawa artisan bakery — built during Applied Projects with real stakeholder requirements.',
-    image: '/images/wyngaarden.png',
+    image: '/images/wyngaarden.jpg',
     link: 'https://www.wyngaardenpastriesandartisanbread.com/',
   },
   {
