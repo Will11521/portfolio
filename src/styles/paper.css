@@ -83,3 +83,13 @@ html.js:not(.reduce) [data-window='front'][data-focus] .fp-dateline time {
   0% { transform: scale(1.18); color: var(--red); }
   100% { transform: scale(1); }
 }
+
+/* ---------- Terminal ---------- */
+.term { font-family: var(--type); font-size: 0.92rem; }
+.term-out { max-height: 50vh; overflow: auto; margin-bottom: 6px; }
+.term-out p { margin: 0 0 2px; white-space: pre-wrap; word-break: break-word; }
+.term-out p.echo { color: var(--red); }
+.term-line { display: flex; gap: 8px; align-items: center; }
+.term-prompt { color: var(--red); white-space: nowrap; }
+.term-line input { flex: 1; min-width: 0; font: inherit; background: transparent; border: 0; border-bottom: 1px dashed var(--ink); color: var(--ink); padding: 2px 0; }
+.term-line input:focus { outline: none; border-bottom-style: solid; }

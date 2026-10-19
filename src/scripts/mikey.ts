@@ -86,7 +86,7 @@ if (root) {
   wake();
 
   try {
-    if (!sessionStorage.getItem('wos-greeted') && matchMedia('(min-width: 768px)').matches) {
+    if (location.pathname === '/' && !sessionStorage.getItem('wos-greeted') && matchMedia('(min-width: 768px)').matches) {
       sessionStorage.setItem('wos-greeted', '1');
       setTimeout(() => { if (!document.querySelector('.bubble:not([hidden])')) setOpen(true); }, reduce ? 0 : 900);
       setTimeout(() => { if (!touched) setOpen(false); }, 12_000);

@@ -47,6 +47,13 @@ const { title, description, path, focus = 'front' } = Astro.props;
       document.querySelectorAll('[data-window]').forEach(initAsk);
       document.addEventListener('wos:mount', (e) => initAsk((e as CustomEvent<Element>).detail));
       document.addEventListener('wos:ask', (e) => loadAsk().then((m) => m.ask((e as CustomEvent<{ q: string }>).detail.q)));
+      const lazyMount = (sel: string, load: () => Promise<{ default?: unknown } & Record<string, unknown>>, fn: string) => {
+        const run = (el: Element) => { if (el.querySelector(sel)) load().then((m) => (m[fn] as (e: Element) => void)(el)); };
+        document.querySelectorAll('[data-window]').forEach(run);
+        document.addEventListener('wos:mount', (e) => run((e as CustomEvent<Element>).detail));
+      };
+      lazyMount('[data-terminal]', () => import('../scripts/terminal-ui.ts'), 'mountTerminal');
+      lazyMount('[data-mikey3d]', () => import('../scripts/mikey3d.ts'), 'mountMikey3d');
       document.addEventListener('click', (e) => {
         if ((e.target as Element).closest('[data-print]')) window.print();
       });
