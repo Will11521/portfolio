@@ -1,6 +1,6 @@
 ---
-interface Props { id: string; title: string; x?: number; y?: number; w?: number; focus?: boolean; closable?: boolean }
-const { id, title, x = 0, y = 0, w = 640, focus = false, closable = true } = Astro.props;
+interface Props { id: string; title: string; x?: number; y?: number; w?: number; focus?: boolean; closable?: boolean; url?: string; pageTitle?: string }
+const { id, title, x = 0, y = 0, w = 640, focus = false, closable = true, url, pageTitle } = Astro.props;
 ---
 <section
   class="win"
@@ -9,6 +9,8 @@ const { id, title, x = 0, y = 0, w = 640, focus = false, closable = true } = Ast
   aria-labelledby={`${id}-title`}
   tabindex="-1"
   data-focus={focus ? '' : undefined}
+  data-url={url}
+  data-page-title={pageTitle}
   style={`--x:${x}px;--y:${y}px;--w:${w}px`}
 >
   <div class="tt">

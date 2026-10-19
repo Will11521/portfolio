@@ -2,12 +2,13 @@
 import OsLayout from '../layouts/OsLayout.astro';
 import Window from '../components/Window.astro';
 import FrontPage from '../components/FrontPage.astro';
+import { FRONT_TITLE, FRONT_DESCRIPTION } from '../data/apps';
 ---
 <OsLayout
-  title="Williamjeet Singh — Business Systems Analyst, Ottawa"
-  description="Williamjeet Singh is a Business Systems Analyst in Ottawa who wires ERPNext, Walmart Marketplace and point-of-sale systems together — and builds things that think."
+  title={FRONT_TITLE}
+  description={FRONT_DESCRIPTION}
   path="/"
   focus="front"
 >
-  <Window id="front" title="Front Page" focus closable={false} x={0} y={0} w={760}><FrontPage primary /></Window>
+  <Window id="front" title="Front Page" focus closable={false} x={0} y={0} w={760} url="/" pageTitle={FRONT_TITLE}><FrontPage primary /></Window>
 </OsLayout>

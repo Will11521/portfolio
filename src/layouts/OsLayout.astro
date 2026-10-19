@@ -51,5 +51,11 @@ const canonical = site + (path === '/' ? '' : path);
     </main>
     <Dock current={focus} />
     <slot name="after" />
+    <script>
+      import '../scripts/wm.ts';
+      document.addEventListener('click', (e) => {
+        if ((e.target as Element).closest('[data-print]')) window.print();
+      });
+    </script>
   </body>
 </html>

@@ -10,3 +10,7 @@ export const APPS: App[] = [
   { id: 'terminal', label: 'Terminal', href: '/terminal', icon: 'terminal' },
   { id: 'contact', label: 'Contact', href: '/contact', icon: 'mail' },
 ];
+
+export const FRONT_TITLE = 'Williamjeet Singh — Business Systems Analyst, Ottawa';
+export const FRONT_DESCRIPTION =
+  'Williamjeet Singh is a Business Systems Analyst in Ottawa who wires ERPNext, Walmart Marketplace and point-of-sale systems together — and builds things that think.';
