@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('printing the résumé hides the OS and fits two pages', async ({ page }) => {
+test('printing the résumé hides the OS and fits one page', async ({ page }) => {
   await page.goto('/resume/');
   await page.emulateMedia({ media: 'print' });
   for (const sel of ['.menubar', '.dock', '.icons', '[data-mikey]', '[data-window="front"]']) {
@@ -9,8 +9,7 @@ test('printing the résumé hides the OS and fits two pages', async ({ page }) =
   await expect(page.getByRole('heading', { level: 1, name: 'Williamjeet Singh' })).toBeVisible();
   const pdf = await page.pdf({ format: 'Letter', printBackground: false });
   const pages = (pdf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) ?? []).length;
-  expect(pages).toBeGreaterThanOrEqual(1);
-  expect(pages).toBeLessThanOrEqual(2);
+  expect(pages).toBe(1);
 });
 
 test('the printed résumé is plain black on white with link URLs', async ({ page }) => {

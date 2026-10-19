@@ -10,7 +10,8 @@
     "check": "astro check",
     "test": "vitest run",
     "e2e": "playwright test",
-    "og": "astro build && node scripts/og.mjs"
+    "og": "astro build && node scripts/og.mjs",
+    "pdf": "astro build && node scripts/resume-pdf.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",

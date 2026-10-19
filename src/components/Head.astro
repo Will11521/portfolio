@@ -36,7 +36,7 @@ const ld = ['/', '/resume/', '/read/', '/contact/'].includes(path) ? profilePage
     var d = document.documentElement, s = null;
     try { s = localStorage.getItem('wos-wallpaper'); } catch (e) {}
     var ok = s === 'sunset' || s === 'paper' || s === 'night';
-    d.dataset.wallpaper = ok ? s : (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'sunset');
+    d.dataset.wallpaper = ok ? s : 'sunset';
     d.classList.add('js');
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduce');
   })();

@@ -8,7 +8,7 @@ import { profile, monthLabel } from '../data/profile';
       <h1>{profile.name}</h1>
       <p class="lede">{profile.title} · {profile.city}, {profile.region}</p>
       <p class="meta"><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · <a href={profile.links.site}>williamdev.is-a.dev</a></p>
-      <p><button type="button" class="btn js-only no-print" data-print>Print / Save as PDF</button></p>
+      <p class="no-print"><a class="btn" href="/Williamjeet%20Singh.pdf" download="Williamjeet Singh - Resume.pdf">Download PDF</a> <button type="button" class="btn ghost js-only" data-print>Print</button></p>
     </header>
     <section aria-labelledby="exp">
       <h2 id="exp">Experience</h2>
