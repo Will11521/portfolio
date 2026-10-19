@@ -1,9 +1,20 @@
 @media print {
-  .menubar, .dock, .icons, .skip, [data-mikey], [data-consent], .no-print { display: none !important; }
-  body { background: #fff !important; color: #000; }
-  .desktop { padding: 0; }
-  .win { position: static; width: auto; max-height: none; border: 0; box-shadow: none; background: #fff; }
-  .win > .tt { display: none; }
-  .win > .body { overflow: visible; padding: 0; }
-  .win:not([data-focus]) { display: none; }
+  @page { margin: 14mm 16mm; }
+  .menubar, .dock, .icons, .skip, [data-mikey], [data-consent], .no-print, .prevnext { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  body { font-size: 10.5pt; line-height: 1.4; }
+  .desktop { padding: 0 !important; min-height: 0; }
+  .win { position: static !important; width: auto !important; max-height: none !important; border: 0 !important; box-shadow: none !important; background: #fff !important; color: #000 !important; }
+  .win > .tt { display: none !important; }
+  .win > .body { overflow: visible !important; padding: 0 !important; }
+  .win:not([data-focus]) { display: none !important; }
+  a { color: #000 !important; text-decoration: none; }
+  .resume a[href^='http']::after, .resume a[href^='mailto']::after { content: ' (' attr(href) ')'; font-size: 0.85em; }
+  .resume a[href^='mailto']::after { content: ''; }
+  .resume h1 { font-size: 20pt; }
+  .resume h2 { font-size: 12pt; margin: 10pt 0 4pt; border-color: #000; break-after: avoid; }
+  .resume h3 { font-size: 10.5pt; margin: 6pt 0 0; break-after: avoid; }
+  .resume .role { break-inside: avoid; }
+  .resume ul { margin: 2pt 0 4pt; }
+  .meta, .kicker { color: #333 !important; }
 }
