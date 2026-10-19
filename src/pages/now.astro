@@ -1,0 +1,11 @@
+---
+import { getEntry, render } from 'astro:content';
+import AppPage from '../layouts/AppPage.astro';
+const entry = (await getEntry('pages', 'now'))!;
+const { Content } = await render(entry);
+---
+<AppPage id="now" windowTitle="Now" title="Now — what Williamjeet Singh is doing" description="What William is working on right now." path="/now" w={560} x={340}>
+  <h1>Now</h1>
+  <p class="meta">Updated {entry.data.updated}</p>
+  <Content />
+</AppPage>

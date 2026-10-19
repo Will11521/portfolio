@@ -15,3 +15,48 @@
   box-shadow: 3px 3px 0 var(--shadow); text-decoration: none; cursor: pointer; color: var(--ink);
 }
 .paper .btn:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--shadow); color: var(--ink); }
+
+/* ---------- Front Page ---------- */
+.fp-dateline { margin: 0; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid var(--ink); padding-bottom: 6px; }
+.masthead { margin: 10px 0 4px; text-align: center; font-family: var(--serif); font-weight: 900; font-size: clamp(3rem, 8vw, 5.4rem); line-height: 0.86; letter-spacing: -0.045em; font-variation-settings: 'opsz' 144; }
+.fp-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 20px; }
+.fp-col { border-left: 1px solid var(--ink); padding-left: 16px; font-size: 0.92rem; }
+.fp-headline { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.04; margin: 4px 0 10px; font-weight: 650; font-family: var(--serif); }
+.fp-now { background: var(--ink); color: var(--paper); padding: 10px 12px; margin-bottom: 14px; }
+.fp-now .kicker { color: #ff9b8c; }
+:root[data-wallpaper='night'] .fp-now .kicker { color: #8a3d12; }
+.fp-now p { margin: 2px 0; font-size: 0.85rem; }
+.fp-now .fp-now-title { font-size: 1.15rem; font-weight: 650; margin: 4px 0; }
+.fp-issue { margin: 6px 0 12px; padding-left: 1.1em; }
+.fp-issue .meta { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.fp-letters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.fp-letters blockquote { margin: 6px 0 0; border-left: 2px solid var(--ink); font-size: 0.9rem; }
+.fp-letters footer { font-style: normal; margin-top: 4px; }
+@media (max-width: 900px) {
+  .fp-grid, .fp-letters-grid { grid-template-columns: 1fr; }
+  .fp-col { border-left: 0; border-top: 1px solid var(--ink); padding: 12px 0 0; }
+}
+
+/* ---------- Projects, stories, résumé ---------- */
+.folder { list-style: none; padding: 0; margin: 0 0 1.2em; display: grid; gap: 14px; }
+.folder li { border: 1px solid var(--ink); padding: 12px 14px; background: var(--paper-2); }
+.folder a { display: grid; text-decoration: none; }
+.folder strong { font-size: 1.3rem; line-height: 1.1; }
+.folder p { margin: 6px 0 0; }
+.clippings { padding-left: 1.1em; }
+.clippings li { margin: 0.5em 0; }
+.story h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 4px 0 8px; font-weight: 700; }
+.story h2 { font-size: 1.25rem; margin: 1.4em 0 0.4em; border-top: 1px solid var(--ink); padding-top: 0.6em; }
+.story img { border: 1px solid var(--ink); }
+.prevnext { display: flex; justify-content: space-between; gap: 12px; margin-top: 1.6em; border-top: 3px double var(--ink); padding-top: 10px; font-family: var(--sans); font-size: 0.85rem; }
+.resume h1 { font-size: 2rem; margin: 0; }
+.resume h2 { font-size: 1.1rem; border-bottom: 1px solid var(--ink); padding-bottom: 3px; margin: 1.4em 0 0.6em; }
+.resume h3 { font-size: 1rem; margin: 0.9em 0 0; }
+.resume .meta { margin: 2px 0 4px; }
+.skills { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+.skills dt { font-family: var(--sans); font-weight: 600; font-size: 0.85rem; }
+.skills dd { margin: 0; }
+.faq dt { font-weight: 650; margin-top: 0.8em; }
+.faq dd { margin: 0.2em 0 0; }
+.term { font-family: var(--type); }
+.mikey3d { aspect-ratio: 4 / 3; border: 1px solid var(--ink); background: var(--paper-2); display: grid; place-items: center; margin: 1em 0; }

@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import { profile, monthLabel } from '../data/profile';
+interface Props { primary?: boolean; compact?: boolean }
+const { primary = false, compact = false } = Astro.props;
+const Headline = primary ? 'h1' : 'p';
+const issue = (await getCollection('projects')).filter((p) => p.data.order <= 5).sort((a, b) => a.data.order - b.data.order);
+const edition = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(new Date());
+---
+<div class="fp">
+  <p class="fp-dateline"><time data-edition>{edition} · Ottawa Edition · Vol. {new Date().getFullYear() - 2000}</time></p>
+  <p class="masthead" aria-hidden={primary ? undefined : 'true'}>The William</p>
+  <hr />
+  <div class="fp-grid">
+    <article class="fp-lead">
+      <p class="kicker">Lead story</p>
+      <Headline class="fp-headline">Williamjeet Singh, the analyst who builds systems that think</Headline>
+      <p class="lede">By day he's a <strong>{profile.title}</strong> at {profile.employer}, running ERPNext and a Walmart Marketplace storefront for a North American tire distributor, and wiring the point-of-sale, the ERP and the marketplace together so nothing gets retyped by hand.</p>
+      <p>After hours he builds things that think. The latest is Mikey, a desk-pet owl robot designed in code that will run on Claude. His little brother is sitting on the dock right now.</p>
+      <p><a href="/projects/erp-integration">Read the integration story →</a></p>
+    </article>
+    <aside class="fp-col" aria-label="Now">
+      <div class="fp-now">
+        <p class="kicker">Now</p>
+        <p class="fp-now-title">{profile.title}</p>
+        <p>{profile.employer} · since {monthLabel(profile.since)}</p>
+        <p>{profile.city} · {profile.availability}</p>
+      </div>
+      <p class="kicker">Opinion</p>
+      <p><a href="/projects/agentauth"><em>“A prompt is a suggestion, not a constraint.”</em></a> Why AI agents need real permissions.</p>
+    </aside>
+    {!compact && <aside class="fp-col" aria-label="In this issue">
+      <p class="kicker">In this issue</p>
+      <ol class="fp-issue">
+        {issue.map((p) => (<li><a href={`/projects/${p.id}`}>{p.data.title}</a> <span class="meta">{p.data.status}</span></li>))}
+      </ol>
+      <p><a href="/resume">Résumé</a> · <a href="/contact">Contact</a></p>
+    </aside>}
+  </div>
+  {!compact && <hr />}
+  {!compact && <section class="fp-letters" aria-label="Letters to the editor">
+    <p class="kicker">Letters to the editor</p>
+    <div class="fp-letters-grid">
+      {profile.letters.map((l) => (<blockquote><p>“{l.quote}”</p><footer class="meta">{l.source}</footer></blockquote>))}
+    </div>
+  </section>}
+</div>

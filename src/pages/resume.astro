@@ -1,0 +1,37 @@
+---
+import AppPage from '../layouts/AppPage.astro';
+import { profile, monthLabel } from '../data/profile';
+---
+<AppPage id="resume" windowTitle="Résumé" title="Résumé — Williamjeet Singh, Business Systems Analyst" description="Résumé of Williamjeet Singh: Business Systems Analyst (ERPNext, Walmart Marketplace, POS integration, Python automation) in Ottawa." path="/resume" w={700}>
+  <article class="resume">
+    <header>
+      <h1>{profile.name}</h1>
+      <p class="lede">{profile.title} · {profile.city}, {profile.region}</p>
+      <p class="meta"><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · <a href={profile.links.site}>williamdev.is-a.dev</a></p>
+      <p><button type="button" class="btn js-only no-print" data-print>Print / Save as PDF</button></p>
+    </header>
+    <section aria-labelledby="exp">
+      <h2 id="exp">Experience</h2>
+      {profile.roles.map((r) => (
+        <div class="role">
+          <h3>{r.title}, {r.org}{r.note ? ` (${r.note})` : ''}</h3>
+          <p class="meta">{monthLabel(r.start)} – {monthLabel(r.end)}</p>
+          <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
+        </div>
+      ))}
+    </section>
+    <section aria-labelledby="edu">
+      <h2 id="edu">Education</h2>
+      {profile.education.map((e) => <p><strong>{e.program}</strong>, {e.school} · {e.note} {e.year}</p>)}
+    </section>
+    <section aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      <dl class="skills">
+        {Object.entries(profile.skills).map(([k, v]) => (<><dt>{k}</dt><dd>{v.join(' · ')}</dd></>))}
+      </dl>
+    </section>
+  </article>
+  <script>
+    document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+  </script>
+</AppPage>

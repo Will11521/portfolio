@@ -1,0 +1,12 @@
+---
+import OsLayout from './OsLayout.astro';
+import Window from '../components/Window.astro';
+import FrontPage from '../components/FrontPage.astro';
+interface Props { id: string; windowTitle: string; title: string; description: string; path: string; x?: number; y?: number; w?: number }
+const { id, windowTitle, title, description, path, x = 300, y = 36, w = 660 } = Astro.props;
+---
+<OsLayout title={title} description={description} path={path} focus={id}>
+  <Window id="front" title="Front Page" closable={false} x={0} y={0} w={760}><FrontPage compact /></Window>
+  <Window id={id} title={windowTitle} focus x={x} y={y} w={w}><slot /></Window>
+  <slot name="after" slot="after" />
+</OsLayout>

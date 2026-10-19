@@ -1,0 +1,9 @@
+---
+import AppPage from '../layouts/AppPage.astro';
+---
+<AppPage id="terminal" windowTitle="Terminal" title="Terminal — WilliamOS" description="A small working terminal for exploring William's site. Type help." path="/terminal" w={600} x={360} y={90}>
+  <h1 class="sr-only">Terminal</h1>
+  <div class="term" data-terminal>
+    <noscript><p>The terminal needs JavaScript. Everything it can open is also here: <a href="/projects">Projects</a>, <a href="/resume">Résumé</a>, <a href="/contact">Contact</a>.</p></noscript>
+  </div>
+</AppPage>

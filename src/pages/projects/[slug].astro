@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import AppPage from '../../layouts/AppPage.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({ params: { slug: entry.id }, props: { entry, prev: all[i - 1], next: all[i + 1] } }));
+}
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<AppPage id={`project-${entry.id}`} windowTitle={d.title} title={`${d.title} — Williamjeet Singh`} description={d.summary} path={`/projects/${entry.id}`} w={680}>
+  <article class="story">
+    <p class="kicker">{d.kicker} · {d.status}</p>
+    <h1>{d.title}</h1>
+    <p class="lede">{d.summary}</p>
+    {d.image && <figure><img src={d.image} alt={d.imageAlt ?? ''} width="1200" height="750" loading="lazy" decoding="async" /></figure>}
+    <Content />
+    {d.links && <p>{d.links.map((l) => <a class="btn" href={l.href} rel="noopener">{l.label} ↗</a>)}</p>}
+  </article>
+  <nav class="prevnext" aria-label="More projects">
+    {prev ? <a href={`/projects/${prev.id}`}>← {prev.data.title}</a> : <span></span>}
+    <a href="/projects">All projects</a>
+    {next ? <a href={`/projects/${next.id}`}>{next.data.title} →</a> : <span></span>}
+  </nav>
+</AppPage>
