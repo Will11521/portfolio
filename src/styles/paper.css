@@ -1,0 +1,17 @@
+/* Editorial type used inside windows. */
+.paper h1, .paper h2, .paper h3 { font-family: var(--serif); line-height: 1.05; letter-spacing: -0.01em; }
+.paper p { margin: 0 0 0.75em; }
+.paper .lede { font-size: 1.12rem; }
+.paper .meta { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); }
+.paper ul, .paper ol { padding-left: 1.2em; }
+.paper li { margin: 0.2em 0; }
+.paper hr { border: 0; border-top: 3px double var(--ink); margin: 1.2em 0; }
+.paper blockquote { margin: 1em 0; padding-left: 1em; border-left: 3px solid var(--red); font-style: italic; }
+.paper figure { margin: 1em 0; }
+.paper figcaption { font-family: var(--sans); font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+.paper .btn {
+  display: inline-block; font-family: var(--sans); font-weight: 600; font-size: 0.85rem;
+  padding: 7px 14px; border: var(--rule) solid var(--ink); border-radius: 3px; background: var(--paper-2);
+  box-shadow: 3px 3px 0 var(--shadow); text-decoration: none; cursor: pointer; color: var(--ink);
+}
+.paper .btn:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--shadow); color: var(--ink); }

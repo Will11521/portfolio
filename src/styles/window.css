@@ -1,0 +1,45 @@
+.windows { position: relative; }
+
+.win {
+  position: absolute;
+  left: var(--x, 0px); top: var(--y, 0px);
+  width: min(var(--w, 640px), calc(100vw - 150px));
+  max-height: calc(100dvh - var(--bar) - 150px);
+  display: flex; flex-direction: column;
+  background: var(--paper); color: var(--ink);
+  border: var(--rule) solid var(--ink); border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--shadow);
+  z-index: var(--z, 1);
+}
+.win[data-focus] { z-index: 20; }
+.win:focus { outline: none; }
+.win:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.win > .tt {
+  position: relative; flex: none; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-bottom: var(--rule) solid var(--ink);
+  background-image: repeating-linear-gradient(0deg, transparent 0 4px, var(--ink) 4px 5px);
+  background-size: 100% 28px; background-position: 0 1px;
+  cursor: default; user-select: none; touch-action: none;
+}
+.win:not([data-focus]) > .tt { background-image: none; }
+.win > .tt h2 {
+  margin: 0; padding: 0 10px; background: var(--paper);
+  font-family: var(--serif); font-size: 13px; font-weight: 600; line-height: 22px;
+}
+.win > .tt .close {
+  position: absolute; left: 8px; top: 7px; width: 13px; height: 13px;
+  border: var(--rule) solid var(--ink); background: var(--paper);
+}
+.win > .tt .close:hover { background: var(--red); }
+
+.win > .body { overflow: auto; overscroll-behavior: contain; padding: 18px 24px 24px; }
+
+@media (max-width: 767px) {
+  .win {
+    position: static; width: auto; max-height: none;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+  .win:not([data-focus]) { display: none; }
+  .win > .body { padding: 16px 16px 22px; }
+}

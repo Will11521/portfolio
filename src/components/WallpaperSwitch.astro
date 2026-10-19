@@ -1,0 +1,27 @@
+---
+const options = [
+  { id: 'sunset', label: 'Sunset wallpaper', swatch: 'linear-gradient(135deg,#f59e7b,#7b5cc4)' },
+  { id: 'paper', label: 'Paper wallpaper', swatch: '#ece4d6' },
+  { id: 'night', label: 'Night wallpaper', swatch: '#100e0b' },
+];
+---
+<div class="wallpapers js-only" role="group" aria-label="Wallpaper">
+  {options.map((o) => (
+    <button type="button" data-wallpaper-option={o.id} aria-pressed="false" aria-label={o.label} style={`--swatch:${o.swatch}`}></button>
+  ))}
+</div>
+<script>
+  const KEY = 'wos-wallpaper';
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-wallpaper-option]');
+  const sync = () => buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.wallpaperOption === root.dataset.wallpaper)));
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      root.dataset.wallpaper = b.dataset.wallpaperOption;
+      try { localStorage.setItem(KEY, b.dataset.wallpaperOption!); } catch {}
+      sync();
+    }),
+  );
+  sync();
+  addEventListener('wos:wallpaper', sync);
+</script>

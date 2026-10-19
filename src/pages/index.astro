@@ -1,4 +1,9 @@
 ---
+import OsLayout from '../layouts/OsLayout.astro';
+import Window from '../components/Window.astro';
 ---
-<html lang="en"><head><meta charset="utf-8"><title>WilliamOS</title></head>
-<body><h1>Williamjeet Singh</h1><p>Business Systems Analyst</p></body></html>
+<OsLayout title="Williamjeet Singh — Business Systems Analyst" description="Williamjeet Singh, Business Systems Analyst in Ottawa." path="/">
+  <Window id="front" title="Front Page" focus closable={false} x={0} y={0} w={760}>
+    <h1>Williamjeet Singh</h1><p>Business Systems Analyst</p>
+  </Window>
+</OsLayout>

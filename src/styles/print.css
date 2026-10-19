@@ -1,0 +1,9 @@
+@media print {
+  .menubar, .dock, .icons, .skip, [data-mikey], [data-consent], .no-print { display: none !important; }
+  body { background: #fff !important; color: #000; }
+  .desktop { padding: 0; }
+  .win { position: static; width: auto; max-height: none; border: 0; box-shadow: none; background: #fff; }
+  .win > .tt { display: none; }
+  .win > .body { overflow: visible; padding: 0; }
+  .win:not([data-focus]) { display: none; }
+}

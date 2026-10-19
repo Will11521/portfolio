@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { APPS } from '../data/apps';
+---
+<ul class="icons" aria-label="Desktop">
+  {APPS.map((a) => (
+    <li><a href={a.href} data-app={a.id} tabindex="-1"><span class="tile"><Icon name={a.icon} /></span><span class="label">{a.label}</span></a></li>
+  ))}
+</ul>

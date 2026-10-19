@@ -1,0 +1,32 @@
+:root {
+  --ink: #141210;
+  --paper: #f6f1e7;
+  --paper-2: #f3ede2;
+  --muted: #5f5950;
+  --red: #b3261e;
+  --copper: #c97b4a;
+  --shadow: var(--ink);
+  --bar: 26px;
+  --rule: 1.5px;
+  --radius: 4px;
+  --serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --type: 'Special Elite', 'Courier New', monospace;
+  --wall: radial-gradient(120% 90% at 20% 10%, #ffd9a8 0%, #f59e7b 35%, #7b5cc4 75%, #2d2a6e 100%);
+  color-scheme: light;
+}
+
+:root[data-wallpaper='paper'] {
+  --wall: radial-gradient(rgba(20, 18, 16, 0.1) 1px, transparent 1px) 0 0 / 14px 14px, #ece4d6;
+}
+
+:root[data-wallpaper='night'] {
+  --ink: #efe6d4;
+  --paper: #1f1b16;
+  --paper-2: #191612;
+  --muted: #b9ae9b;
+  --red: #e8a46a;
+  --shadow: #c97b4a;
+  --wall: radial-gradient(rgba(239, 230, 212, 0.1) 1px, transparent 1px) 0 0 / 14px 14px, #100e0b;
+  color-scheme: dark;
+}

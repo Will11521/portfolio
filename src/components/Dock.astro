@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { APPS } from '../data/apps';
+interface Props { current: string }
+const { current } = Astro.props;
+---
+<nav aria-label="Apps">
+  <ul class="dock">
+    {APPS.map((a) => (
+      <li>
+        <a href={a.href} aria-label={a.label} aria-current={a.id === current ? 'page' : undefined} data-app={a.id}>
+          <span class="tile"><Icon name={a.icon} /></span><span class="name" aria-hidden="true">{a.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

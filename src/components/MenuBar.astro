@@ -1,0 +1,17 @@
+---
+import WallpaperSwitch from './WallpaperSwitch.astro';
+const built = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', weekday: 'short', day: 'numeric', month: 'short' }).format(new Date());
+---
+<header class="menubar">
+  <a class="brand" href="/">WilliamOS</a>
+  <nav aria-label="Main">
+    <a href="/projects">Projects</a>
+    <a href="/resume">Résumé</a>
+    <a href="/contact">Contact</a>
+    <a class="read" href="/read">Read the paper</a>
+  </nav>
+  <div class="right">
+    <WallpaperSwitch />
+    <time data-clock>Ottawa · {built}</time>
+  </div>
+</header>

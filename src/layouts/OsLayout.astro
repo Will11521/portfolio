@@ -1,0 +1,55 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/600.css';
+import '@fontsource/special-elite/400.css';
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/window.css';
+import '../styles/paper.css';
+import '../styles/print.css';
+import MenuBar from '../components/MenuBar.astro';
+import Dock from '../components/Dock.astro';
+import DesktopIcons from '../components/DesktopIcons.astro';
+
+interface Props { title: string; description: string; path: string; ogImage?: string; focus?: string }
+const { title, description, path, focus = 'front' } = Astro.props;
+const site = Astro.site!.href.replace(/\/$/, '');
+const canonical = site + (path === '/' ? '' : path);
+---
+<!doctype html>
+<html lang="en-CA" data-wallpaper="sunset">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f59e7b" />
+    <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement, s = null;
+        try { s = localStorage.getItem('wos-wallpaper'); } catch (e) {}
+        var ok = s === 'sunset' || s === 'paper' || s === 'night';
+        d.dataset.wallpaper = ok ? s : (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'sunset');
+        d.classList.add('js');
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduce');
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#win">Skip to window</a>
+    <MenuBar />
+    <main id="desktop" class="desktop">
+      <DesktopIcons />
+      <div class="windows" data-windows>
+        <slot />
+      </div>
+    </main>
+    <Dock current={focus} />
+    <slot name="after" />
+  </body>
+</html>

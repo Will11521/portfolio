@@ -1,0 +1,19 @@
+---
+interface Props { id: string; title: string; x?: number; y?: number; w?: number; focus?: boolean; closable?: boolean }
+const { id, title, x = 0, y = 0, w = 640, focus = false, closable = true } = Astro.props;
+---
+<section
+  class="win"
+  data-window={id}
+  id={focus ? 'win' : undefined}
+  aria-labelledby={`${id}-title`}
+  tabindex="-1"
+  data-focus={focus ? '' : undefined}
+  style={`--x:${x}px;--y:${y}px;--w:${w}px`}
+>
+  <div class="tt">
+    {closable && <a class="close" href="/" data-close aria-label={`Close ${title}`}></a>}
+    <h2 id={`${id}-title`}>{title}</h2>
+  </div>
+  <div class="body paper"><slot /></div>
+</section>
