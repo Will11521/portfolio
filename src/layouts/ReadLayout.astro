@@ -18,5 +18,20 @@ const { title, description, path } = Astro.props;
   <body>
     <a class="skip" href="#read">Skip to the paper</a>
     <main id="read" class="read paper"><slot /></main>
+    <script is:inline>
+      // Today's dateline, in Ottawa. Inline on purpose: importing clock.ts here splits it into a shared chunk
+      // and costs the OS pages a round trip. Same format as formatEdition() — tests/e2e/edition.spec.ts pins both.
+      (function () {
+        function stamp() {
+          var p = {};
+          new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+            .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+          var t = p.weekday + ', ' + p.month + ' ' + p.day + ', ' + p.year + ' · Ottawa Edition · Vol. ' + (p.year - 2000);
+          document.querySelectorAll('[data-edition]').forEach(function (e) { if (e.textContent !== t) e.textContent = t; });
+        }
+        stamp();
+        setInterval(stamp, 30000);
+      })();
+    </script>
   </body>
 </html>

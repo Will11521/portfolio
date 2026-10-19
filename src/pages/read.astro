@@ -10,7 +10,7 @@ const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2
 ---
 <ReadLayout title="Read the paper — Williamjeet Singh, Business Systems Analyst" description="Everything on one page: William's current role, case studies, résumé and contact." path="/read/">
   <header class="read-head">
-    <p class="fp-dateline">{formatEdition(new Date())}</p>
+    <p class="fp-dateline"><time data-edition>{formatEdition(new Date())}</time></p>
     <p class="masthead" aria-hidden="true">The William</p>
     <h1>Williamjeet Singh, the analyst who builds systems that think</h1>
     <p class="lede">{profile.title} at {profile.employer}, {profile.city}. {profile.summary.split('. ').slice(1).join('. ')}</p>

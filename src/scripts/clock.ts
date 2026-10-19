@@ -18,5 +18,5 @@ function stampEditions() {
 
 tick();
 stampEditions();
-setInterval(tick, 30_000);
+setInterval(() => { tick(); stampEditions(); }, 30_000);
 document.addEventListener('wos:mount', () => { tick(); stampEditions(); });
