@@ -159,7 +159,19 @@ export const knowledgeBase: KnowledgeBase = {
 
   experience: [
     {
-      role: "Manager of Sales",
+      role: "Business Systems Analyst",
+      company: "The Kara Consultancy",
+      period: "Sep 2026 - Present",
+      achievements: [
+        "ERPNext administration and Walmart Marketplace operations for a North American tire distributor, plus the integration between them and the TireGuru POS",
+        "Administer ERPNext (Frappe) — item master, purchasing, sales orders, stock",
+        "Run the Walmart Marketplace catalogue: listing quality, GTIN/UPC accuracy, repricing floors, inventory feeds, order and return exceptions",
+        "Build and maintain the POS ↔ ERP ↔ marketplace integration so orders, inventory and tracking aren't retyped by hand",
+        "Work against the Walmart Marketplace API and automate reconciliation that used to be manual"
+      ]
+    },
+    {
+      role: "Manager of Sales (part-time)",
       company: "WirelessPlus",
       period: "Sep 2025 - Present",
       achievements: [
@@ -206,7 +218,8 @@ export const knowledgeBase: KnowledgeBase = {
   resume: {
     url: "/Williamjeet%20Singh.pdf",
     summary: [
-      "Manager of Sales at WirelessPlus with hands-on device repair, wireless sales, inventory, and customer service experience.",
+      "Business Systems Analyst at The Kara Consultancy — ERPNext, Walmart Marketplace and POS integration, with Python automation.",
+      "Manager of Sales (part-time) at WirelessPlus with hands-on device repair, wireless sales, inventory, and customer service experience.",
       "Former Artificial Intelligence Intern at Square Root Technologies, building AI-driven business intelligence workflows with Python, Flask, and TextBlob.",
       "Experience across shift leadership at Booster Juice and digital marketing at Brazily Fitness with measurable engagement impact."
     ]
@@ -285,10 +298,10 @@ export const responsePatterns = {
   experience: {
     triggers: ["experience", "background", "education", "study", "school", "college", "learn", "work", "job", "intern"],
     responses: [
-      `William currently works as Manager of Sales at WirelessPlus, and his recent background also includes an AI internship at Square Root Technologies, shift leadership at Booster Juice, and social media management at Brazily Fitness.`,
+      `William currently works as a Business Systems Analyst at The Kara Consultancy, running ERPNext, Walmart Marketplace and POS integration for a North American tire distributor. He is also Manager of Sales (part-time) at WirelessPlus, and his background includes an AI internship at Square Root Technologies, shift leadership at Booster Juice, and social media management at Brazily Fitness.`,
       `He has diverse experience across mobile hardware repair and wireless sales, AI-driven business intelligence, team leadership, and digital marketing.`,
       `His background combines customer-facing retail execution at WirelessPlus, AI product work at Square Root Technologies, leadership at Booster Juice, and growth-focused content work at Brazily Fitness.`,
-      `William is studying Interactive Media Design at Algonquin College while building experience across web, AI, analytics, sales, and marketing.`
+      `William graduated in Interactive Media Design from Algonquin College in 2026, and builds across ERP systems, web, AI, analytics, sales, and marketing.`
     ]
   },
 

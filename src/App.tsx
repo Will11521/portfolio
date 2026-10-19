@@ -73,8 +73,19 @@ const WHAT_I_DO = [
 
 const TIMELINE = [
   {
+    period: 'Sep 2026 - Present',
+    role: 'Business Systems Analyst — The Kara Consultancy',
+    details: [
+      'ERPNext administration and Walmart Marketplace operations for a North American tire distributor, plus the integration between them and the TireGuru POS',
+      'Administer ERPNext (Frappe) — item master, purchasing, sales orders, stock',
+      'Run the Walmart Marketplace catalogue: listing quality, GTIN/UPC accuracy, repricing floors, inventory feeds, order and return exceptions',
+      "Build and maintain the POS ↔ ERP ↔ marketplace integration so orders, inventory and tracking aren't retyped by hand",
+      'Work against the Walmart Marketplace API and automate reconciliation that used to be manual',
+    ],
+  },
+  {
     period: 'Sep 2025 - Present',
-    role: 'Manager of Sales — WirelessPlus',
+    role: 'Manager of Sales (part-time) — WirelessPlus',
     details: [
       'Diagnose and repair smartphones including screen replacements, battery replacements, charging ports, and hardware issues',
       'Configure devices, perform data transfers, and troubleshoot software and connectivity problems',
