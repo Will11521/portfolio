@@ -21,7 +21,6 @@ export const profile = {
   email: 'williamjeetsingh2004@gmail.com',
   links: {
     linkedin: 'https://www.linkedin.com/in/williamjeetsingh2004/',
-    github: 'https://github.com/Will11521',
     site: 'https://williamdev.is-a.dev',
   },
   availability: 'Open to freelance and collaborations.',

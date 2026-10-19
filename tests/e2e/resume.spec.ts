@@ -20,3 +20,10 @@ test('the printed résumé is plain black on white with link URLs', async ({ pag
   const after = await page.locator('.resume a[href^="https://www.linkedin"]').first().evaluate((a) => getComputedStyle(a, '::after').content);
   expect(after).toContain('linkedin.com');
 });
+
+test('the printed site link is not followed by its own URL', async ({ page }) => {
+  await page.goto('/resume/');
+  await page.emulateMedia({ media: 'print' });
+  const after = await page.locator('.resume header a[href^="https://williamdev"]').evaluate((a) => getComputedStyle(a, '::after').content);
+  expect(['none', 'normal', '""']).toContain(after);
+});

@@ -2,13 +2,12 @@
 import AppPage from '../layouts/AppPage.astro';
 import { profile } from '../data/profile';
 ---
-<AppPage id="contact" windowTitle="Contact" title="Contact — Williamjeet Singh" description="Email Williamjeet Singh, or find him on LinkedIn and GitHub. Based in Ottawa." path="/contact/" w={520} x={360}>
+<AppPage id="contact" windowTitle="Contact" title="Contact — Williamjeet Singh" description="Email Williamjeet Singh, or find him on LinkedIn. Based in Ottawa." path="/contact/" w={520} x={360}>
   <h1>Contact</h1>
   <p class="lede">The fastest way to reach me is email.</p>
   <p><a class="btn" href={`mailto:${profile.email}`}>{profile.email}</a></p>
   <ul>
     <li><a href={profile.links.linkedin}>LinkedIn</a></li>
-    <li><a href={profile.links.github}>GitHub</a></li>
   </ul>
   <p class="meta">{profile.city}, Canada · <span data-local-time>Eastern Time</span> · {profile.availability}</p>
 </AppPage>

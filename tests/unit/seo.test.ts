@@ -8,7 +8,7 @@ describe('structured data', () => {
     expect(p.jobTitle).toBe('Business Systems Analyst');
     expect(p.worksFor).toEqual({ '@type': 'Organization', name: 'The Kara Consultancy' });
     expect(p.address).toEqual({ '@type': 'PostalAddress', addressLocality: 'Ottawa', addressRegion: 'ON', addressCountry: 'CA' });
-    expect(p.sameAs).toEqual(['https://www.linkedin.com/in/williamjeetsingh2004/', 'https://github.com/Will11521']);
+    expect(p.sameAs).toEqual(['https://www.linkedin.com/in/williamjeetsingh2004/']);
   });
   it('never publishes a phone number or street address', () => {
     const s = JSON.stringify(personJsonLd());

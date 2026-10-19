@@ -46,8 +46,8 @@ export const INTENTS: Intent[] = [
   },
   {
     id: 'contact',
-    patterns: [/\bcontact\b/, /\be-?mail\b/, /\breach\b/, /\bhire\b/, /\bget in touch\b/, /\blinkedin\b/, /\bgithub\b/, /\btalk to\b/],
-    answer: `Email ${profile.email} — that's the fastest way. He's also on LinkedIn and GitHub.`,
+    patterns: [/\bcontact\b/, /\be-?mail\b/, /\breach\b/, /\bhire\b/, /\bget in touch\b/, /\blinkedin\b/, /\btalk to\b/],
+    answer: `Email ${profile.email} — that's the fastest way. He's also on LinkedIn.`,
     action: { label: 'Open Contact', href: '/contact/' },
   },
   {

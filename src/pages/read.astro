@@ -14,7 +14,7 @@ const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2
     <p class="masthead" aria-hidden="true">The William</p>
     <h1>Williamjeet Singh, the analyst who builds systems that think</h1>
     <p class="lede">{profile.title} at {profile.employer}, {profile.city}. {profile.summary.split('. ').slice(1).join('. ')}</p>
-    <p class="read-contact"><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · <a href="/">Open WilliamOS →</a></p>
+    <p class="read-contact"><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href="/">Open WilliamOS →</a></p>
   </header>
   <section aria-labelledby="r-now">
     <h2 id="r-now">Now</h2>
@@ -52,6 +52,6 @@ const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2
   <section aria-labelledby="r-contact">
     <h2 id="r-contact">Contact</h2>
     <p><a class="btn" href={`mailto:${profile.email}`}>{profile.email}</a></p>
-    <p><a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · {profile.city}, Canada</p>
+    <p><a href={profile.links.linkedin}>LinkedIn</a> · {profile.city}, Canada</p>
   </section>
 </ReadLayout>

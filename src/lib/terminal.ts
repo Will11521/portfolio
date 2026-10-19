@@ -70,7 +70,7 @@ export function runCommand(input: string, ctx: Ctx): Result {
       }
       return { out: [arg ? `cat: ${arg}: try open ${arg}` : 'cat what? try: cat resume'] };
     case 'contact':
-      return { out: [`email   ${profile.email}`, `linkedin ${profile.links.linkedin}`, `github  ${profile.links.github}`], open: '/contact/' };
+      return { out: [`email   ${profile.email}`, `linkedin ${profile.links.linkedin}`], open: '/contact/' };
     case 'ask': {
       if (!arg) return { out: ['ask what? e.g. ask what does he do now'] };
       const r = answer(arg);

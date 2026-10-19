@@ -13,7 +13,7 @@ export function personJsonLd(p = profile): object {
     address: { '@type': 'PostalAddress', addressLocality: p.city, addressRegion: p.region, addressCountry: 'CA' },
     url: SITE,
     email: `mailto:${p.email}`,
-    sameAs: [p.links.linkedin, p.links.github],
+    sameAs: [p.links.linkedin],
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Algonquin College' },
     knowsAbout: ['ERPNext', 'Systems integration', 'Walmart Marketplace', 'Python', 'AI agents', 'Web development'],
   };
