@@ -36,7 +36,7 @@ if (root) {
   });
   bubble.addEventListener('click', (e) => {
     const chip = (e.target as Element).closest<HTMLAnchorElement>('[data-chip]');
-    if (chip && matchMedia('(min-width: 768px)').matches) {
+    if (chip && matchMedia('(min-width: 1024px)').matches) {
       e.preventDefault();
       e.stopPropagation();
       setOpen(false);
@@ -88,7 +88,7 @@ if (root) {
   try {
     if (location.pathname === '/' && !sessionStorage.getItem('wos-greeted')) {
       sessionStorage.setItem('wos-greeted', '1');
-      const phone = !matchMedia('(min-width: 768px)').matches;
+      const phone = !matchMedia('(min-width: 1024px)').matches;
       setTimeout(() => { if (!document.querySelector('.bubble:not([hidden])')) setOpen(true); }, reduce ? 0 : 900);
       setTimeout(() => { if (!touched) setOpen(false); }, phone ? 7000 : 12_000);
     }

@@ -19,7 +19,9 @@ function loadAnalytics() {
 }
 
 const clip = document.querySelector<HTMLElement>('[data-consent]');
-const choice = readConsent(localStorage);
+let store: Pick<Storage, 'getItem'> = { getItem: () => null };
+try { store = window.localStorage; } catch {} // throws SecurityError when site data is blocked
+const choice = readConsent(store);
 if (choice === 'granted') {
   w.gtag(...gtagConsentUpdate('granted'));
   ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadAnalytics as () => void);

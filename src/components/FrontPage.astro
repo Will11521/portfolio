@@ -34,7 +34,8 @@ const issue = (await getCollection('projects')).filter((p) => p.data.order <= 5)
       <ol class="fp-issue">
         {issue.map((p) => (<li><a href={`/projects/${p.id}/`}>{p.data.title}</a> <span class="meta">{p.data.status}</span></li>))}
       </ol>
-      <p><a href="/resume/">Résumé</a> · <a href="/contact/">Contact</a></p>
+      <p><a href="/resume/">Résumé</a> · <a href="/contact/">Contact</a> · <a href="/now/">Now</a> · <a href="/back-issues/">Back Issues</a></p>
+      <p><a class="fp-read" href="/read/">Read it all on one page →</a></p>
     </aside>}
   </div>
   {!compact && <hr />}

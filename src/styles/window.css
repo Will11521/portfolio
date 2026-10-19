@@ -2,8 +2,11 @@
 
 .win {
   position: absolute;
-  left: var(--x, 0px); top: var(--y, 0px);
-  width: min(var(--w, 640px), calc(100vw - 150px));
+  --win-w: min(var(--w, 640px), calc(100vw - 150px));
+  width: var(--win-w);
+  /* Never start past the right edge of the desktop, whatever x the page asked for. */
+  left: clamp(0px, var(--x, 0px), max(0px, calc(100% - var(--win-w))));
+  top: var(--y, 0px);
   max-height: calc(100dvh - var(--bar) - 150px);
   display: flex; flex-direction: column;
   background: var(--paper); color: var(--ink);
@@ -35,7 +38,7 @@
 
 .win > .body { overflow: auto; overscroll-behavior: contain; padding: 18px 24px 24px; }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .win {
     position: static; width: auto; max-height: none;
     box-shadow: 4px 4px 0 var(--shadow);

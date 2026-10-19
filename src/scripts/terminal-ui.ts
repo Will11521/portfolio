@@ -1,7 +1,7 @@
 import { runCommand, complete } from '../lib/terminal';
 import { WALLPAPER_KEY } from '../lib/wallpaper';
 
-const WIDE = () => matchMedia('(min-width: 768px)').matches;
+const WIDE = () => matchMedia('(min-width: 1024px)').matches;
 
 export function mountTerminal(win: Element) {
   const host = win.querySelector<HTMLElement>('[data-terminal]');

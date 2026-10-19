@@ -13,9 +13,9 @@ const { id, title, x = 0, y = 0, w = 640, focus = false, closable = true, url, p
   data-page-title={pageTitle}
   style={`--x:${x}px;--y:${y}px;--w:${w}px`}
 >
-  <div class="tt">
+  <div class="tt" title="Drag to move · Alt + arrow keys">
     {closable && <a class="close" href="/" data-close aria-label={`Close ${title}`}></a>}
     <h2 id={`${id}-title`}>{title}</h2>
   </div>
-  <div class="body paper"><slot /></div>
+  <div class="body paper" tabindex="-1" aria-labelledby={`${id}-title`}><slot /></div>
 </section>

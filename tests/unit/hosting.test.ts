@@ -8,7 +8,11 @@ const dist = 'dist';
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
 const built = existsSync(join(dist, 'index.html'));
 
-describe.skipIf(!built)('GitHub Pages layout', () => {
+// Locally it skips without a build; on CI a missing build is a failure, so the guard can't silently vanish.
+const onCI = !!process.env.CI;
+
+describe.skipIf(!built && !onCI)('GitHub Pages layout', () => {
+  it('has a build to check', () => expect(built, 'run npm run build before npm test').toBe(true));
   const files = built ? walk(dist) : [];
   it('never has a page file beside a folder of the same name', () => {
     const clashes = files.filter((f) => f.endsWith('.html') && !f.endsWith('index.html') && !f.endsWith('404.html') && existsSync(f.replace(/\.html$/, '')));

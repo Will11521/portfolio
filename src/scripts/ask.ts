@@ -1,7 +1,7 @@
 import { answer } from '../lib/assistant';
 import { CHIPS, GREETING } from '../data/assistant';
 
-const WIDE = () => matchMedia('(min-width: 768px)').matches;
+const WIDE = () => matchMedia('(min-width: 1024px)').matches;
 let pending: string | null = null;
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);

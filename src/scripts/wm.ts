@@ -2,13 +2,15 @@
 // Wide screens only; on phones and without JS every link is a normal page load.
 import { clamp, bringToFront, extractWindow, windowIdForPath, isAppLink } from '../lib/wm-core';
 
-const WIDE = matchMedia('(min-width: 768px)');
+const WIDE = matchMedia('(min-width: 1024px)');
 const REDUCE = matchMedia('(prefers-reduced-motion: reduce)');
 const POS_KEY = 'wos-pos';
 const container = document.querySelector<HTMLElement>('[data-windows]')!;
 let order: string[] = [];
 const openers = new Map<string, HTMLElement>();
 const inflight = new Map<string, Promise<void>>();
+let idx = 0;                                   // history position of the current entry
+const openedAt = new Map<number, string>();    // history position → window it opened
 
 const winEl = (id: string) => container.querySelector<HTMLElement>(`[data-window="${CSS.escape(id)}"]`);
 const allWins = () => [...container.querySelectorAll<HTMLElement>('[data-window]')];
@@ -51,7 +53,7 @@ function focusWin(id: string, opts: { moveFocus?: boolean } = {}) {
   applyStack();
   setCurrent(id);
   if (el.dataset.pageTitle) document.title = el.dataset.pageTitle;
-  if (opts.moveFocus !== false) el.focus({ preventScroll: true });
+  if (opts.moveFocus !== false) (el.querySelector<HTMLElement>(':scope > .body') ?? el).focus({ preventScroll: true });
 }
 
 function mount(el: HTMLElement) {
@@ -64,6 +66,7 @@ function mount(el: HTMLElement) {
 async function open(href: string, push: boolean, opener?: HTMLElement) {
   const url = new URL(href, location.href);
   const id = windowIdForPath(url.pathname);
+  const entry = push ? idx + 1 : idx;
   if (opener) openers.set(id, opener);
   if (winEl(id)) {
     transition(() => focusWin(id));
@@ -93,12 +96,16 @@ async function open(href: string, push: boolean, opener?: HTMLElement) {
       if (!winEl(id)) {
         container.append(el);
         mount(el);
+        if (push) openedAt.set(entry, id);
       }
       inflight.delete(id);
       focusWin(id);
     });
   }
-  if (push) history.pushState({ wid: id }, '', url.pathname);
+  if (push) {
+    idx = entry;
+    history.pushState({ wid: id, idx: entry }, '', url.pathname + url.search + url.hash);
+  }
 }
 
 function close(id: string) {
@@ -112,7 +119,7 @@ function close(id: string) {
     const next = top() ?? 'front';
     focusWin(next, { moveFocus: !opener });
     const nextEl = winEl(next);
-    history.replaceState({ wid: next }, '', nextEl?.dataset.url ?? '/');
+    history.replaceState({ wid: next, idx }, '', nextEl?.dataset.url ?? '/');
   });
   if (opener && document.contains(opener)) opener.focus();
   openers.delete(id);
@@ -146,7 +153,7 @@ function onPointerDown(e: PointerEvent) {
   const id = w.dataset.window!;
   if (id !== top()) {
     focusWin(id, { moveFocus: false });
-    history.replaceState({ wid: id }, '', w.dataset.url ?? location.pathname);
+    history.replaceState({ wid: id, idx }, '', w.dataset.url ?? location.pathname);
   }
   const bar = (e.target as Element).closest<HTMLElement>('.tt');
   if (!bar || (e.target as Element).closest('a')) return;
@@ -184,11 +191,12 @@ function onKey(e: KeyboardEvent) {
     e.preventDefault();
     const next = e.key === 'ArrowRight' ? order[0] : order[order.length - 2];
     focusWin(next);
-    history.replaceState({ wid: next }, '', winEl(next)?.dataset.url ?? '/');
+    history.replaceState({ wid: next, idx }, '', winEl(next)?.dataset.url ?? '/');
     return;
   }
   const el = id ? winEl(id) : null;
-  if (el && document.activeElement === el && e.key.startsWith('Arrow') && !e.ctrlKey && !e.altKey) {
+  const typing = (e.target as Element).closest('input, textarea, select, [contenteditable]');
+  if (el && e.altKey && !e.ctrlKey && !e.metaKey && !typing && e.key.startsWith('Arrow') && el.contains(document.activeElement)) {
     e.preventDefault();
     const rect = el.getBoundingClientRect();
     const host = container.getBoundingClientRect();
@@ -204,9 +212,21 @@ function onKey(e: KeyboardEvent) {
 
 function onPop(e: PopStateEvent) {
   if (!WIDE.matches) { location.reload(); return; }
+  const target = (e.state && typeof e.state.idx === 'number') ? e.state.idx : 0;
+  if (target < idx) {
+    // Going back: close every window that a later history entry opened.
+    for (const [at, wid] of [...openedAt]) {
+      if (at > target) {
+        winEl(wid)?.remove();
+        order = order.filter((o) => o !== wid);
+        openedAt.delete(at);
+      }
+    }
+  }
+  idx = target;
   const id = (e.state && e.state.wid) || windowIdForPath(location.pathname);
   if (winEl(id)) transition(() => focusWin(id));
-  else open(location.pathname, false);
+  else open(location.pathname + location.search, false).then(() => openedAt.set(idx, id));
 }
 
 function init() {
@@ -216,7 +236,7 @@ function init() {
   if (focused) order.push(focused.dataset.window!);
   if (WIDE.matches) wins.forEach(mount);
   applyStack();
-  history.replaceState({ wid: top() }, '', location.pathname);
+  history.replaceState({ wid: top(), idx }, '');
   document.addEventListener('click', onClick, true);
   document.addEventListener('pointerdown', onPointerDown);
   document.addEventListener('keydown', onKey);
