@@ -12,6 +12,7 @@ import Head from '../components/Head.astro';
 import MenuBar from '../components/MenuBar.astro';
 import Dock from '../components/Dock.astro';
 import DesktopIcons from '../components/DesktopIcons.astro';
+import ConsentClipping from '../components/ConsentClipping.astro';
 
 interface Props { title: string; description: string; path: string; ogImage?: string; focus?: string }
 const { title, description, path, focus = 'front' } = Astro.props;
@@ -32,10 +33,12 @@ const { title, description, path, focus = 'front' } = Astro.props;
       </div>
     </main>
     <Dock current={focus} />
+    <ConsentClipping />
     <slot name="after" />
     <script>
       import '../scripts/wm.ts';
       import '../scripts/clock.ts';
+      import '../scripts/consent-ui.ts';
       const idle = (fn: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 1200));
       idle(() => import('../scripts/mikey.ts'));
       let askMod: Promise<typeof import('../scripts/ask.ts')> | null = null;

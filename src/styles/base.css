@@ -159,3 +159,15 @@ html.js:not(.reduce) .mikey { animation: mikey-pop 520ms cubic-bezier(.2, .9, .3
   border: var(--rule) solid var(--ink); border-radius: 3px; background: var(--paper); color: var(--ink);
 }
 .ask-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+
+/* ---------- Consent clipping ---------- */
+.clip {
+  position: fixed; left: 18px; bottom: 18px; z-index: 45; width: 270px;
+  background: var(--paper); color: var(--ink); border: var(--rule) solid var(--ink); border-radius: 3px;
+  box-shadow: 4px 4px 0 var(--shadow); padding: 10px 12px; font-size: 0.85rem; transform: rotate(-1deg);
+}
+.clip p { margin: 0 0 8px; }
+.clip-actions { display: flex; gap: 8px; }
+.clip .btn, .paper .btn.ghost { font-family: var(--sans); font-weight: 600; font-size: 0.8rem; padding: 5px 12px; border: var(--rule) solid var(--ink); border-radius: 3px; background: var(--paper-2); color: var(--ink); cursor: pointer; box-shadow: 2px 2px 0 var(--shadow); }
+.clip .btn.ghost { background: transparent; box-shadow: none; }
+@media (max-width: 767px) { .clip { left: 8px; right: 8px; width: auto; bottom: 76px; transform: none; } }
