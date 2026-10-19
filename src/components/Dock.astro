@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { APPS } from '../data/apps';
+import MikeySprite from './MikeySprite.astro';
 interface Props { current: string }
 const { current } = Astro.props;
 ---
@@ -13,5 +14,6 @@ const { current } = Astro.props;
         </a>
       </li>
     ))}
+    <li class="dock-mikey"><MikeySprite /></li>
   </ul>
 </nav>

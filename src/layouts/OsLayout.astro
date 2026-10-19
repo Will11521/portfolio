@@ -54,6 +54,14 @@ const canonical = site + (path === '/' ? '' : path);
     <script>
       import '../scripts/wm.ts';
       import '../scripts/clock.ts';
+      const idle = (fn: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 1200));
+      idle(() => import('../scripts/mikey.ts'));
+      let askMod: Promise<typeof import('../scripts/ask.ts')> | null = null;
+      const loadAsk = () => (askMod ??= import('../scripts/ask.ts'));
+      const initAsk = (el: Element) => { if (el.querySelector('[data-ask]')) loadAsk().then((m) => m.mountAsk(el)); };
+      document.querySelectorAll('[data-window]').forEach(initAsk);
+      document.addEventListener('wos:mount', (e) => initAsk((e as CustomEvent<Element>).detail));
+      document.addEventListener('wos:ask', (e) => loadAsk().then((m) => m.ask((e as CustomEvent<{ q: string }>).detail.q)));
       document.addEventListener('click', (e) => {
         if ((e.target as Element).closest('[data-print]')) window.print();
       });

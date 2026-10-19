@@ -1,0 +1,23 @@
+---
+import { CHIPS, GREETING } from '../data/assistant';
+---
+<div class="mikey" data-mikey data-state="awake">
+  <button type="button" class="mikey-btn" aria-label="Mikey — ask me about William" aria-expanded="false" aria-controls="mikey-bubble">
+    <svg class="mikey-owl" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <path class="tuft" d="M16 14 L22 22 M48 14 L42 22" />
+      <path class="body" d="M12 26c0-8 9-13 20-13s20 5 20 13v16c0 9-9 15-20 15s-20-6-20-15z" />
+      <path class="face" d="M24 20h16l7 7v12l-7 7H24l-7-7V27z" />
+      <g class="eye"><circle cx="25.5" cy="33" r="6.5" /><circle data-pupil cx="25.5" cy="33" r="2.6" /></g>
+      <g class="eye"><circle cx="38.5" cy="33" r="6.5" /><circle data-pupil cx="38.5" cy="33" r="2.6" /></g>
+      <path class="lid" d="M19 33h13M32 33h13" />
+      <path class="feet" d="M26 57v3M38 57v3" />
+    </svg>
+  </button>
+  <div class="bubble" id="mikey-bubble" role="dialog" aria-label="Mikey" hidden>
+    <p class="bubble-line" data-bubble-line>{GREETING}</p>
+    <div class="chips">
+      {CHIPS.map((c) => <a class="chip" href={`/ask?q=${encodeURIComponent(c)}`} data-chip={c} data-wm-skip>{c}</a>)}
+    </div>
+    <a class="bubble-more" href="/ask">Ask me anything →</a>
+  </div>
+</div>

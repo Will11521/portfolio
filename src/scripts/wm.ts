@@ -8,6 +8,7 @@ const POS_KEY = 'wos-pos';
 const container = document.querySelector<HTMLElement>('[data-windows]')!;
 let order: string[] = [];
 const openers = new Map<string, HTMLElement>();
+const inflight = new Map<string, Promise<void>>();
 
 const winEl = (id: string) => container.querySelector<HTMLElement>(`[data-window="${CSS.escape(id)}"]`);
 const allWins = () => [...container.querySelectorAll<HTMLElement>('[data-window]')];
@@ -66,24 +67,34 @@ async function open(href: string, push: boolean, opener?: HTMLElement) {
   if (opener) openers.set(id, opener);
   if (winEl(id)) {
     transition(() => focusWin(id));
+  } else if (inflight.has(id)) {
+    await inflight.get(id);
+    return;
   } else {
     let html: string;
-    try {
-      const res = await fetch(url.pathname, { headers: { accept: 'text/html' } });
+    const req = fetch(url.pathname, { headers: { accept: 'text/html' } }).then((res) => {
       if (!res.ok) throw new Error(String(res.status));
-      html = await res.text();
+      return res.text();
+    });
+    inflight.set(id, req.then(() => undefined, () => undefined));
+    try {
+      html = await req;
     } catch {
+      inflight.delete(id);
       location.assign(url.href);
       return;
     }
     const markup = extractWindow(html, id);
-    if (!markup) { location.assign(url.href); return; }
+    if (!markup) { inflight.delete(id); location.assign(url.href); return; }
     const tpl = document.createElement('template');
     tpl.innerHTML = markup;
     const el = tpl.content.firstElementChild as HTMLElement;
     transition(() => {
-      container.append(el);
-      mount(el);
+      if (!winEl(id)) {
+        container.append(el);
+        mount(el);
+      }
+      inflight.delete(id);
       focusWin(id);
     });
   }
@@ -118,7 +129,7 @@ function onClick(e: MouseEvent) {
     return;
   }
   const a = target.closest<HTMLAnchorElement>('a[href]');
-  if (!a || !isAppLink(a, location.origin)) return;
+  if (!a || a.hasAttribute('data-wm-skip') || !isAppLink(a, location.origin)) return;
   e.preventDefault();
   const url = new URL(a.href);
   if (url.pathname === location.pathname && winEl(windowIdForPath(url.pathname))) {
@@ -210,6 +221,11 @@ function init() {
   document.addEventListener('pointerdown', onPointerDown);
   document.addEventListener('keydown', onKey);
   addEventListener('popstate', onPop);
+  document.addEventListener('wos:open', (e) => {
+    const href = (e as CustomEvent<{ href: string }>).detail.href;
+    if (WIDE.matches) open(href, location.pathname !== href);
+    else location.assign(href);
+  });
 }
 
 init();
