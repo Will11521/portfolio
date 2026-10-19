@@ -60,3 +60,26 @@
 .faq dd { margin: 0.2em 0 0; }
 .term { font-family: var(--type); }
 .mikey3d { aspect-ratio: 4 / 3; border: 1px solid var(--ink); background: var(--paper-2); display: grid; place-items: center; margin: 1em 0; }
+
+/* ---------- Print-in (decorative; content is visible from the first frame) ---------- */
+html.js:not(.reduce) [data-window='front'][data-focus] .fp { position: relative; }
+html.js:not(.reduce) [data-window='front'][data-focus] .fp::after {
+  content: ''; position: absolute; top: -18px; bottom: -24px; left: 0; width: 46px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 22%, transparent) 40%, color-mix(in srgb, var(--ink) 40%, transparent) 50%, transparent);
+  left: -60px; opacity: 0;
+  animation: wos-press 650ms cubic-bezier(.4, 0, .2, 1) 80ms 1 both;
+}
+html.js:not(.reduce) [data-window='front'][data-focus] .fp-dateline time {
+  display: inline-block; transform-origin: left center;
+  animation: wos-stamp 260ms cubic-bezier(.2, .8, .3, 1.4) 520ms 1 both;
+}
+@keyframes wos-press {
+  0% { left: -60px; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes wos-stamp {
+  0% { transform: scale(1.18); color: var(--red); }
+  100% { transform: scale(1); }
+}

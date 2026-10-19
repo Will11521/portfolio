@@ -53,6 +53,7 @@ const canonical = site + (path === '/' ? '' : path);
     <slot name="after" />
     <script>
       import '../scripts/wm.ts';
+      import '../scripts/clock.ts';
       document.addEventListener('click', (e) => {
         if ((e.target as Element).closest('[data-print]')) window.print();
       });

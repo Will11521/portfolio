@@ -1,6 +1,7 @@
 ---
 import WallpaperSwitch from './WallpaperSwitch.astro';
-const built = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', weekday: 'short', day: 'numeric', month: 'short' }).format(new Date());
+import { ottawaClock } from '../lib/edition';
+const built = ottawaClock(new Date());
 ---
 <header class="menubar">
   <a class="brand" href="/">WilliamOS</a>

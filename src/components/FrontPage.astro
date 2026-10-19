@@ -1,14 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import { profile, monthLabel } from '../data/profile';
+import { formatEdition } from '../lib/edition';
 interface Props { primary?: boolean; compact?: boolean }
 const { primary = false, compact = false } = Astro.props;
 const Headline = primary ? 'h1' : 'p';
 const issue = (await getCollection('projects')).filter((p) => p.data.order <= 5).sort((a, b) => a.data.order - b.data.order);
-const edition = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(new Date());
 ---
 <div class="fp">
-  <p class="fp-dateline"><time data-edition>{edition} · Ottawa Edition · Vol. {new Date().getFullYear() - 2000}</time></p>
+  <p class="fp-dateline"><time data-edition>{formatEdition(new Date())}</time></p>
   <p class="masthead" aria-hidden={primary ? undefined : 'true'}>The William</p>
   <hr />
   <div class="fp-grid">
