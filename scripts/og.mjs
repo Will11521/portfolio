@@ -21,8 +21,8 @@ async function htmlFiles(dir) {
 }
 
 const pathOf = (file) => {
-  const rel = relative(dist, file).replace(/\\/g, '/').replace(/\.html$/, '');
-  return rel === 'index' ? '/' : `/${rel}`;
+  const rel = relative(dist, file).replace(/\\/g, '/').replace(/\.html$/, '').replace(/(^|\/)index$/, '');
+  return rel === '' ? '/' : `/${rel}/`;
 };
 const slugOf = (path) => path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-') || 'index';
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);

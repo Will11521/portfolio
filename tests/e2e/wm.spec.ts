@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 test('opens app as window', async ({ page }) => {
   await page.getByRole('navigation', { name: 'Apps' }).getByRole('link', { name: 'Projects' }).click();
   await expect(page.locator('[data-window="projects"]')).toBeVisible();
-  await expect(page).toHaveURL(/\/projects$/);
+  await expect(page).toHaveURL(/\/projects\/$/);
   expect(await page.evaluate(() => (window as any).__wos)).toBe('alive');
   await expect(page).toHaveTitle(/Projects/);
 });
@@ -18,7 +18,7 @@ test('history restores windows', async ({ page }) => {
   await page.locator('[data-window="projects"]').getByRole('link', { name: /Mikey/ }).first().click();
   await expect(page.locator('[data-window="project-mikey"]')).toBeVisible();
   await page.goBack();
-  await expect(page).toHaveURL(/\/projects$/);
+  await expect(page).toHaveURL(/\/projects\/$/);
   await expect(page.locator('[data-window="projects"][data-focus]')).toBeVisible();
   await page.goBack();
   await expect(page).toHaveURL(/localhost:\d+\/?$/);

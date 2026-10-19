@@ -1,0 +1,60 @@
+/* Latin-only faces (no Cyrillic/Greek/Vietnamese downloads) + metric-matched fallbacks to stop layout shift. */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../assets/fonts/fraunces-latin-opsz-normal.subset.woff2') format('woff2-variations');
+  unicode-range: ;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../assets/fonts/inter-tight-latin-400-normal.subset.woff2') format('woff2');
+  unicode-range: ;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('../assets/fonts/inter-tight-latin-600-normal.subset.woff2') format('woff2');
+  unicode-range: ;
+}
+@font-face {
+  font-family: 'Special Elite';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../../node_modules/@fontsource/special-elite/files/special-elite-latin-400-normal.woff2') format('woff2');
+  unicode-range: ;
+}
+/* Fallback sizes tuned by measuring real layout shift with delayed fonts on /, /projects/mikey/, /read/, /resume/ (mobile + desktop). */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-weight: 100 549;
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 105%;
+  ascent-override: 97.8%;
+  descent-override: 25.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Fraunces Fallback';
+  font-weight: 550 1000;
+  src: local('Georgia Bold'), local('Georgia-Bold'), local('Times New Roman Bold');
+  size-adjust: 95%;
+  ascent-override: 97.8%;
+  descent-override: 25.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica');
+  size-adjust: 91.4%;
+  ascent-override: 96.9%;
+  descent-override: 24.1%;
+  line-gap-override: 0%;
+}

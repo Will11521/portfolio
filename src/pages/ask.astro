@@ -3,12 +3,12 @@ import AppPage from '../layouts/AppPage.astro';
 import { profile } from '../data/profile';
 const faq = [
   { q: 'What does he do now?', a: `He's a ${profile.title} at ${profile.employer}: ERPNext, a Walmart Marketplace storefront and the integration that ties them to the point-of-sale.` },
-  { q: 'Show me his best project', a: 'Start with the POS ↔ ERP ↔ Marketplace integration.', href: '/projects/erp-integration' },
-  { q: 'What are you?', a: "I'm Mikey, a little owl. The real me is a desk robot William is building; this one lives on his website." , href: '/projects/mikey' },
-  { q: 'How do I contact him?', a: `Email ${profile.email}, or find him on LinkedIn.`, href: '/contact' },
+  { q: 'Show me his best project', a: 'Start with the POS ↔ ERP ↔ Marketplace integration.', href: '/projects/erp-integration/' },
+  { q: 'What are you?', a: "I'm Mikey, a little owl. The real me is a desk robot William is building; this one lives on his website." , href: '/projects/mikey/' },
+  { q: 'How do I contact him?', a: `Email ${profile.email}, or find him on LinkedIn.`, href: '/contact/' },
 ];
 ---
-<AppPage id="ask" windowTitle="Ask Mikey" title="Ask Mikey — questions about Williamjeet Singh" description="Ask Mikey the owl about William's work, projects and how to reach him." path="/ask" w={460} x={430} y={120}>
+<AppPage id="ask" windowTitle="Ask Mikey" title="Ask Mikey — questions about Williamjeet Singh" description="Ask Mikey the owl about William's work, projects and how to reach him." path="/ask/" w={460} x={430} y={120}>
   <h1>Ask Mikey</h1>
   <div data-ask>
     <dl class="faq">

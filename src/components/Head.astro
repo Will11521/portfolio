@@ -1,15 +1,16 @@
 ---
-import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import frauncesLatin from '../assets/fonts/fraunces-latin-opsz-normal.subset.woff2?url';
 import { personJsonLd, profilePageJsonLd, ogPath } from '../lib/seo';
 interface Props { title: string; description: string; path: string }
 const { title, description, path } = Astro.props;
 const site = Astro.site!.href.replace(/\/$/, '');
 const canonical = site + (path === '/' ? '' : path);
 const og = site + ogPath(path);
-const ld = ['/', '/resume', '/read', '/contact'].includes(path) ? profilePageJsonLd(path) : personJsonLd();
+const ld = ['/', '/resume/', '/read/', '/contact/'].includes(path) ? profilePageJsonLd(path) : personJsonLd();
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin fetchpriority="high" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
@@ -28,11 +29,10 @@ const ld = ['/', '/resume', '/read', '/contact'].includes(path) ? profilePageJso
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
-<link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
-{path === '/' && <link rel="alternate" type="text/html" href="/read" title="Read the paper" />}
+{path === '/' && <link rel="alternate" type="text/html" href="/read/" title="Read the paper" />}
 <script is:inline>
   (function () {
-    if (location.pathname === '/' && /(^|[?&])read(=|&|$)/.test(location.search.slice(1))) { location.replace('/read'); return; }
+    if (location.pathname === '/' && /(^|[?&])read(=|&|$)/.test(location.search.slice(1))) { location.replace('/read/'); return; }
     var d = document.documentElement, s = null;
     try { s = localStorage.getItem('wos-wallpaper'); } catch (e) {}
     var ok = s === 'sunset' || s === 'paper' || s === 'night';

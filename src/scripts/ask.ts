@@ -49,20 +49,20 @@ export function mountAsk(win: Element) {
     input.value = '';
   });
   const fromUrl = new URLSearchParams(location.search).get('q');
-  if (fromUrl && location.pathname === '/ask') post(fromUrl);
+  if (fromUrl && location.pathname === '/ask/') post(fromUrl);
   if (pending) { post(pending); pending = null; }
 }
 
 export function ask(q: string) {
   if (document.querySelector('[data-window="ask"] [data-ask-log]')) {
-    document.dispatchEvent(new CustomEvent('wos:open', { detail: { href: '/ask' } }));
+    document.dispatchEvent(new CustomEvent('wos:open', { detail: { href: '/ask/' } }));
     post(q);
     return;
   }
   if (WIDE()) {
     pending = q;
-    document.dispatchEvent(new CustomEvent('wos:open', { detail: { href: '/ask' } }));
+    document.dispatchEvent(new CustomEvent('wos:open', { detail: { href: '/ask/' } }));
   } else {
-    location.assign(`/ask?q=${encodeURIComponent(q)}`);
+    location.assign(`/ask/?q=${encodeURIComponent(q)}`);
   }
 }

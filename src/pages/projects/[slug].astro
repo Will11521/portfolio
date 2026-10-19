@@ -10,7 +10,7 @@ const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 ---
-<AppPage id={`project-${entry.id}`} windowTitle={d.title} title={`${d.title} — Williamjeet Singh`} description={d.summary} path={`/projects/${entry.id}`} w={680}>
+<AppPage id={`project-${entry.id}`} windowTitle={d.title} title={`${d.title} — Williamjeet Singh`} description={d.summary} path={`/projects/${entry.id}/`} w={680}>
   <article class="story">
     <p class="kicker">{d.kicker} · {d.status}</p>
     <h1>{d.title}</h1>
@@ -20,8 +20,8 @@ const d = entry.data;
     {d.links && <p>{d.links.map((l) => <a class="btn" href={l.href} rel="noopener">{l.label} ↗</a>)}</p>}
   </article>
   <nav class="prevnext" aria-label="More projects">
-    {prev ? <a href={`/projects/${prev.id}`}>← {prev.data.title}</a> : <span></span>}
-    <a href="/projects">All projects</a>
-    {next ? <a href={`/projects/${next.id}`}>{next.data.title} →</a> : <span></span>}
+    {prev ? <a href={`/projects/${prev.id}/`}>← {prev.data.title}</a> : <span></span>}
+    <a href="/projects/">All projects</a>
+    {next ? <a href={`/projects/${next.id}/`}>{next.data.title} →</a> : <span></span>}
   </nav>
 </AppPage>

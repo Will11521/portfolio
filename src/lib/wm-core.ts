@@ -22,7 +22,7 @@ export function extractWindow(html: string, id: string): string | null {
   return el ? el.outerHTML : null;
 }
 
-/** The window id a URL path opens: `/` → front, `/projects/x` → project-x, else the first segment. */
+/** The window id a URL path opens: `/` → front, `/projects/x/` → project-x, else the first segment. */
 export function windowIdForPath(path: string): string {
   const parts = path.replace(/\/+$/, '').split('/').filter(Boolean);
   if (parts.length === 0) return 'front';
@@ -39,7 +39,7 @@ export function isAppLink(a: HTMLAnchorElement, origin: string): boolean {
   try { url = new URL(a.href); } catch { return false; }
   if (url.origin !== origin) return false;
   if (url.hash) return false;
-  if (url.pathname === '/read') return false;
+  if (url.pathname.replace(/\/$/, '') === '/read') return false;
   if (/\.[a-z0-9]+$/i.test(url.pathname)) return false;
   return true;
 }

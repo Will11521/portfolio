@@ -8,7 +8,7 @@ const cases = all.filter((p) => p.data.kind === 'case');
 const clippings = all.filter((p) => p.data.kind === 'clipping');
 const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2>/g, '</h4>');
 ---
-<ReadLayout title="Read the paper — Williamjeet Singh, Business Systems Analyst" description="Everything on one page: William's current role, case studies, résumé and contact." path="/read">
+<ReadLayout title="Read the paper — Williamjeet Singh, Business Systems Analyst" description="Everything on one page: William's current role, case studies, résumé and contact." path="/read/">
   <header class="read-head">
     <p class="fp-dateline">{formatEdition(new Date())}</p>
     <p class="masthead" aria-hidden="true">The William</p>
@@ -33,7 +33,7 @@ const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2
   </section>
   <section aria-labelledby="r-clips">
     <h2 id="r-clips">Clippings</h2>
-    <ul>{clippings.map((p) => <li><a href={`/projects/${p.id}`}>{p.data.title}</a> — {p.data.summary}</li>)}</ul>
+    <ul>{clippings.map((p) => <li><a href={`/projects/${p.id}/`}>{p.data.title}</a> — {p.data.summary}</li>)}</ul>
   </section>
   <section aria-labelledby="r-resume">
     <h2 id="r-resume">Résumé</h2>

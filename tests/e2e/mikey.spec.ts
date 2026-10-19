@@ -17,11 +17,11 @@ test('a chip opens Ask Mikey and its answer opens Contact', async ({ page }) => 
   await expect(ask.locator('.msg.me')).toHaveText('How do I contact him?');
   await ask.getByRole('link', { name: /Open Contact/ }).click();
   await expect(page.locator('[data-window="contact"]')).toBeVisible();
-  await expect(page).toHaveURL(/\/contact$/);
+  await expect(page).toHaveURL(/\/contact\/$/);
 });
 
 test('typing a question gets an answer', async ({ page }) => {
-  await page.goto('/ask');
+  await page.goto('/ask/');
   const ask = page.locator('[data-window="ask"]');
   await ask.getByLabel('Ask Mikey a question').fill('what does he do now');
   await ask.getByRole('button', { name: 'Ask' }).click();

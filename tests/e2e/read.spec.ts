@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('read mode is one plain article', async ({ page }) => {
-  await page.goto('/read');
+  await page.goto('/read/');
   await expect(page.locator('[data-window]')).toHaveCount(0);
   await expect(page.locator('.dock')).toHaveCount(0);
   const h2 = await page.locator('main h2').allTextContents();
@@ -12,7 +12,7 @@ test('read mode is one plain article', async ({ page }) => {
 });
 
 test('the first screen answers who, what and how to reach him', async ({ page }) => {
-  await page.goto('/read');
+  await page.goto('/read/');
   const fold = await page.evaluate(() => {
     const out: string[] = [];
     document.querySelectorAll('main *').forEach((el) => {
@@ -27,5 +27,5 @@ test('the first screen answers who, what and how to reach him', async ({ page })
 
 test('?read on the front page goes to read mode', async ({ page }) => {
   await page.goto('/?read');
-  await expect(page).toHaveURL(/\/read$/);
+  await expect(page).toHaveURL(/\/read\/$/);
 });

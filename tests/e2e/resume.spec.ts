@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('printing the résumé hides the OS and fits two pages', async ({ page }) => {
-  await page.goto('/resume');
+  await page.goto('/resume/');
   await page.emulateMedia({ media: 'print' });
   for (const sel of ['.menubar', '.dock', '.icons', '[data-mikey]', '[data-window="front"]']) {
     await expect(page.locator(sel).first()).toBeHidden();
@@ -14,7 +14,7 @@ test('printing the résumé hides the OS and fits two pages', async ({ page }) =
 });
 
 test('the printed résumé is plain black on white with link URLs', async ({ page }) => {
-  await page.goto('/resume');
+  await page.goto('/resume/');
   await page.emulateMedia({ media: 'print' });
   const body = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   expect(body).toBe('rgb(255, 255, 255)');

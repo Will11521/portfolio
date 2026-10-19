@@ -5,13 +5,13 @@ const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.da
 const cases = all.filter((p) => p.data.kind === 'case');
 const clippings = all.filter((p) => p.data.kind === 'clipping');
 ---
-<AppPage id="projects" windowTitle="Projects" title="Projects — Williamjeet Singh" description="Case studies and clippings: systems integration, a robot owl, a client website, and ideas about AI agents." path="/projects">
+<AppPage id="projects" windowTitle="Projects" title="Projects — Williamjeet Singh" description="Case studies and clippings: systems integration, a robot owl, a client website, and ideas about AI agents." path="/projects/">
   <h1>Projects</h1>
   <p class="lede">Case studies first, then clippings from the archive.</p>
   <ul class="folder">
     {cases.map((p) => (
       <li>
-        <a href={`/projects/${p.id}`}><span class="kicker">{p.data.kicker}</span><strong>{p.data.title}</strong></a>
+        <a href={`/projects/${p.id}/`}><span class="kicker">{p.data.kicker}</span><strong>{p.data.title}</strong></a>
         <p>{p.data.summary}</p>
         <p class="meta">{p.data.status}</p>
       </li>
@@ -19,6 +19,6 @@ const clippings = all.filter((p) => p.data.kind === 'clipping');
   </ul>
   <h2>Clippings</h2>
   <ul class="clippings">
-    {clippings.map((p) => (<li><a href={`/projects/${p.id}`}>{p.data.title}</a> — {p.data.summary} <span class="meta">{p.data.status}</span></li>))}
+    {clippings.map((p) => (<li><a href={`/projects/${p.id}/`}>{p.data.title}</a> — {p.data.summary} <span class="meta">{p.data.status}</span></li>))}
   </ul>
 </AppPage>

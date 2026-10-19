@@ -24,7 +24,12 @@ if (choice === 'granted') {
   w.gtag(...gtagConsentUpdate('granted'));
   ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadAnalytics as () => void);
 } else if (choice === null && clip) {
-  clip.hidden = false;
+  // Wait for a first sign of interest (scroll, tap, key) so the note never sits on the first screen.
+  const show = () => {
+    clip.hidden = false;
+    for (const ev of ['scroll', 'pointerdown', 'keydown', 'wheel', 'touchstart']) removeEventListener(ev, show, true);
+  };
+  for (const ev of ['scroll', 'pointerdown', 'keydown', 'wheel', 'touchstart']) addEventListener(ev, show, { capture: true, passive: true });
 }
 
 clip?.addEventListener('click', (e) => {

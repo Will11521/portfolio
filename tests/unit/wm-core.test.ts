@@ -26,8 +26,8 @@ describe('extractWindow', () => {
 
 describe('windowIdForPath', () => {
   it('maps the root to the Front Page', () => expect(windowIdForPath('/')).toBe('front'));
-  it('maps a case study to project-<slug>', () => expect(windowIdForPath('/projects/mikey')).toBe('project-mikey'));
-  it('maps an app to its first segment', () => expect(windowIdForPath('/resume')).toBe('resume'));
+  it('maps a case study to project-<slug>', () => expect(windowIdForPath('/projects/mikey/')).toBe('project-mikey'));
+  it('maps an app to its first segment', () => expect(windowIdForPath('/resume/')).toBe('resume'));
   it('ignores a trailing slash', () => expect(windowIdForPath('/projects/')).toBe('projects'));
 });
 

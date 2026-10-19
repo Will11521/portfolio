@@ -7,10 +7,11 @@
   --copper: #c97b4a;
   --shadow: var(--ink);
   --bar: 26px;
+  --tabbar: 66px;
   --rule: 1.5px;
   --radius: 4px;
-  --serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;
+  --sans: 'Inter Tight', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --type: 'Special Elite', 'Courier New', monospace;
   --wall: radial-gradient(120% 90% at 20% 10%, #ffd9a8 0%, #f59e7b 35%, #7b5cc4 75%, #2d2a6e 100%);
   color-scheme: light;

@@ -9,8 +9,8 @@ export interface Ctx { cwd: string }
 export interface Result { out: string[]; open?: string; theme?: Wallpaper; cwd?: string; clear?: boolean; close?: boolean }
 
 const APPS: Record<string, string> = {
-  front: '/', home: '/', projects: '/projects', resume: '/resume', contact: '/contact', now: '/now',
-  mikey: '/mikey', ask: '/ask', terminal: '/terminal', 'back-issues': '/back-issues', read: '/read',
+  front: '/', home: '/', projects: '/projects/', resume: '/resume/', contact: '/contact/', now: '/now/',
+  mikey: '/mikey/', ask: '/ask/', terminal: '/terminal/', 'back-issues': '/back-issues/', read: '/read/',
 };
 const LS_HOME = 'projects/  resume  contact  now  mikey  back-issues';
 const COMMANDS = ['ask', 'cat', 'cd', 'clear', 'contact', 'date', 'echo', 'exit', 'help', 'ls', 'mikey', 'open', 'sudo', 'theme', 'whoami'];
@@ -52,9 +52,9 @@ export function runCommand(input: string, ctx: Ctx): Result {
     case 'open': {
       if (!arg) return { out: ['open what? try: open projects'] };
       const key = arg.toLowerCase().replace(/\/$/, '');
-      if (inProjects && PROJECT_SLUGS.includes(key)) return { out: [`opening ${key}…`], open: `/projects/${key}` };
+      if (inProjects && PROJECT_SLUGS.includes(key)) return { out: [`opening ${key}…`], open: `/projects/${key}/` };
       if (APPS[key]) return { out: [`opening ${key}…`], open: APPS[key] };
-      if (PROJECT_SLUGS.includes(key)) return { out: [`opening ${key}…`], open: `/projects/${key}` };
+      if (PROJECT_SLUGS.includes(key)) return { out: [`opening ${key}…`], open: `/projects/${key}/` };
       return { out: [`open: nothing called ${arg} — try ls`] };
     }
     case 'cat':
@@ -70,7 +70,7 @@ export function runCommand(input: string, ctx: Ctx): Result {
       }
       return { out: [arg ? `cat: ${arg}: try open ${arg}` : 'cat what? try: cat resume'] };
     case 'contact':
-      return { out: [`email   ${profile.email}`, `linkedin ${profile.links.linkedin}`, `github  ${profile.links.github}`], open: '/contact' };
+      return { out: [`email   ${profile.email}`, `linkedin ${profile.links.linkedin}`, `github  ${profile.links.github}`], open: '/contact/' };
     case 'ask': {
       if (!arg) return { out: ['ask what? e.g. ask what does he do now'] };
       const r = answer(arg);

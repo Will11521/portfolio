@@ -28,7 +28,7 @@ export function profilePageJsonLd(path: string): object {
   };
 }
 
-/** Where a page's Open Graph image lives: `/` → /og/index.png, `/projects/mikey` → /og/projects-mikey.png. */
+/** Where a page's Open Graph image lives: `/` → /og/index.png, `/projects/mikey/` → /og/projects-mikey.png. */
 export function ogPath(path: string): string {
   const slug = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-') || 'index';
   return `/og/${slug}.png`;

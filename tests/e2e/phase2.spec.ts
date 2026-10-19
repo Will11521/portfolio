@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { readFileSync, readdirSync } from 'node:fs';
 
 test('the terminal runs commands and drives the OS', async ({ page }) => {
-  await page.goto('/terminal');
+  await page.goto('/terminal/');
   const term = page.locator('[data-window="terminal"]');
   const input = term.getByLabel('Terminal command');
   await input.fill('whoami');
@@ -19,7 +19,7 @@ test('the terminal runs commands and drives the OS', async ({ page }) => {
 });
 
 test('terminal history recalls the last command', async ({ page }) => {
-  await page.goto('/terminal');
+  await page.goto('/terminal/');
   const input = page.locator('[data-window="terminal"]').getByLabel('Terminal command');
   await input.fill('date');
   await input.press('Enter');
@@ -28,7 +28,7 @@ test('terminal history recalls the last command', async ({ page }) => {
 });
 
 test('the Mikey window shows the 3D owl (or its picture)', async ({ page }) => {
-  await page.goto('/mikey');
+  await page.goto('/mikey/');
   const mount = page.locator('[data-window="mikey"] [data-mikey3d]');
   await expect(mount.locator('canvas, img').first()).toBeVisible({ timeout: 15_000 });
 });
@@ -42,7 +42,7 @@ test('three.js is not in the front page first load', async () => {
 });
 
 test('back issues show captioned screenshots of earlier sites', async ({ page }) => {
-  await page.goto('/back-issues');
+  await page.goto('/back-issues/');
   const figs = page.locator('[data-window="back-issues"] figure');
   await expect(figs).toHaveCount(2);
   for (const f of await figs.all()) {

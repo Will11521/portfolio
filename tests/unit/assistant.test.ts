@@ -10,8 +10,8 @@ describe('Ask Mikey', () => {
     expect(r.text).toContain('Business Systems Analyst');
     expect(r.text).toContain('The Kara Consultancy');
   });
-  it('sends contact questions to Contact', () => expect(answer('how do i contact him').action?.href).toBe('/contact'));
-  it('picks the integration as the best project', () => expect(answer('Show me his best project').action?.href).toBe('/projects/erp-integration'));
+  it('sends contact questions to Contact', () => expect(answer('how do i contact him').action?.href).toBe('/contact/'));
+  it('picks the integration as the best project', () => expect(answer('Show me his best project').action?.href).toBe('/projects/erp-integration/'));
   it('introduces itself as an owl', () => expect(answer('what are you').text).toMatch(/owl/i));
   it('says only freelance and collaborations about work', () => {
     const t = answer('is he open to work').text;
@@ -23,7 +23,7 @@ describe('Ask Mikey', () => {
       const r = answer(q);
       expect(r.id, q).toBe('fallback');
       expect(r.text).toContain("I don't know that one");
-      expect(r.action?.href).toBe('/contact');
+      expect(r.action?.href).toBe('/contact/');
     }
   });
   it('never carries private or client details', () => {

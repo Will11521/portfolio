@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const ROUTES = ['/', '/projects', '/projects/erp-integration', '/projects/mikey', '/projects/wyngaarden', '/projects/agentauth', '/projects/analytics', '/projects/nerve', '/projects/dreamsynth', '/resume', '/contact', '/ask', '/now', '/back-issues', '/mikey', '/terminal', '/read'];
+const ROUTES = ['/', '/projects/', '/projects/erp-integration/', '/projects/mikey/', '/projects/wyngaarden/', '/projects/agentauth/', '/projects/analytics/', '/projects/nerve/', '/projects/dreamsynth/', '/resume/', '/contact/', '/ask/', '/now/', '/back-issues/', '/mikey/', '/terminal/', '/read/'];
 
 for (const path of ROUTES) {
   test(`${path} has a working share preview`, async ({ request }) => {

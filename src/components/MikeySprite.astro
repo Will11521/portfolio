@@ -16,8 +16,8 @@ import { CHIPS, GREETING } from '../data/assistant';
   <div class="bubble" id="mikey-bubble" role="dialog" aria-label="Mikey" hidden>
     <p class="bubble-line" data-bubble-line>{GREETING}</p>
     <div class="chips">
-      {CHIPS.map((c) => <a class="chip" href={`/ask?q=${encodeURIComponent(c)}`} data-chip={c} data-wm-skip>{c}</a>)}
+      {CHIPS.map((c) => <a class="chip" href={`/ask/?q=${encodeURIComponent(c)}`} data-chip={c} data-wm-skip>{c}</a>)}
     </div>
-    <a class="bubble-more" href="/ask">Ask me anything →</a>
+    <a class="bubble-more" href="/ask/">Ask me anything →</a>
   </div>
 </div>

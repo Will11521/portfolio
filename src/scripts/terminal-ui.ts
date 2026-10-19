@@ -51,7 +51,7 @@ export function mountTerminal(win: Element) {
     }
     if (r.close) win.querySelector<HTMLAnchorElement>('[data-close]')?.click();
     if (r.open) {
-      if (r.open === '/read' || !WIDE()) location.assign(r.open);
+      if (r.open === '/read/' || !WIDE()) location.assign(r.open);
       else document.dispatchEvent(new CustomEvent('wos:open', { detail: { href: r.open } }));
     }
   });

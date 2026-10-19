@@ -41,5 +41,6 @@
     box-shadow: 4px 4px 0 var(--shadow);
   }
   .win:not([data-focus]) { display: none; }
-  .win > .body { padding: 16px 16px 22px; }
+  .win > .body { padding: 16px 16px 22px; overflow: visible; }
+  .win > .body { overflow-wrap: anywhere; }
 }

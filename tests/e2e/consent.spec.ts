@@ -6,6 +6,7 @@ test('analytics never loads before consent, and loads after Sure', async ({ page
   await page.route(/googletagmanager|google-analytics/, (r) => r.fulfill({ status: 204, body: '' }));
   await page.goto('/');
   const clip = page.getByRole('region', { name: 'Cookie choice' });
+  await page.mouse.wheel(0, 200);
   await expect(clip).toBeVisible();
   await page.waitForTimeout(3500);
   expect(ga).toEqual([]);
@@ -13,6 +14,7 @@ test('analytics never loads before consent, and loads after Sure', async ({ page
   await expect(clip).toBeHidden();
   await expect.poll(() => ga.length).toBeGreaterThan(0);
   await page.reload();
+  await page.mouse.wheel(0, 200);
   await expect(page.getByRole('region', { name: 'Cookie choice' })).toBeHidden();
 });
 
@@ -20,8 +22,10 @@ test('No thanks hides the clipping and keeps analytics off', async ({ page }) =>
   const ga: string[] = [];
   page.on('request', (r) => { if (/googletagmanager|google-analytics/.test(r.url())) ga.push(r.url()); });
   await page.goto('/');
+  await page.mouse.wheel(0, 200);
   await page.getByRole('region', { name: 'Cookie choice' }).getByRole('button', { name: 'No thanks' }).click();
   await page.reload();
+  await page.mouse.wheel(0, 200);
   await page.waitForTimeout(3500);
   await expect(page.getByRole('region', { name: 'Cookie choice' })).toBeHidden();
   expect(ga).toEqual([]);

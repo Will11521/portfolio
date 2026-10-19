@@ -15,14 +15,14 @@ describe('structured data', () => {
     expect(s).not.toMatch(/telephone|streetAddress|postalCode/);
   });
   it('wraps the person in a ProfilePage for a given URL', () => {
-    const pp = profilePageJsonLd('/resume') as any;
+    const pp = profilePageJsonLd('/resume/') as any;
     expect(pp['@type']).toBe('ProfilePage');
-    expect(pp.url).toBe('https://williamdev.is-a.dev/resume');
+    expect(pp.url).toBe('https://williamdev.is-a.dev/resume/');
     expect(pp.mainEntity.name).toBe('Williamjeet Singh');
   });
 });
 
 describe('ogPath', () => {
   it('maps the root', () => expect(ogPath('/')).toBe('/og/index.png'));
-  it('flattens nested paths', () => expect(ogPath('/projects/mikey')).toBe('/og/projects-mikey.png'));
+  it('flattens nested paths', () => expect(ogPath('/projects/mikey/')).toBe('/og/projects-mikey.png'));
 });

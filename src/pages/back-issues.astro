@@ -5,7 +5,7 @@ const issues = [
   { src: '/back-issues/2025-accidental-therapist.webp', year: 2025, title: 'Designer, Developer, Accidental Therapist', alt: 'The 2025 site: a calm beige page with soft waves and the line William — Designer, Developer, Accidental Therapist', note: 'Plain HTML, CSS and GSAP, coded by hand: floating text, animated scrolls and a golden lab story hidden in a fun fact.' },
 ];
 ---
-<AppPage id="back-issues" windowTitle="Back Issues" title="Back Issues — earlier versions of this site" description="Earlier editions of williamdev.is-a.dev, from 2025 to 2026." path="/back-issues" w={680}>
+<AppPage id="back-issues" windowTitle="Back Issues" title="Back Issues — earlier versions of this site" description="Earlier editions of williamdev.is-a.dev, from 2025 to 2026." path="/back-issues/" w={680}>
   <h1>Back Issues</h1>
   <p class="lede">Earlier editions of this site, kept the way a paper keeps its archive.</p>
   {issues.map((i) => (
@@ -14,5 +14,5 @@ const issues = [
       <figcaption><strong>{i.year} · {i.title}.</strong> {i.note}</figcaption>
     </figure>
   ))}
-  <p class="meta">Older experiments, like <a href="/projects/dreamsynth">DreamSynth</a> and <a href="/projects/nerve">NERVE</a>, live in Projects as clippings.</p>
+  <p class="meta">Older experiments, like <a href="/projects/dreamsynth/">DreamSynth</a> and <a href="/projects/nerve/">NERVE</a>, live in Projects as clippings.</p>
 </AppPage>

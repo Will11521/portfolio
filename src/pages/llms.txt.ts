@@ -13,12 +13,12 @@ export const GET: APIRoute = async ({ site }) => {
     profile.summary,
     '',
     '## Start here',
-    `- [Read the paper](${url('/read')}): everything on one page`,
-    `- [Résumé](${url('/resume')})`,
-    `- [Contact](${url('/contact')}): ${profile.email}`,
+    `- [Read the paper](${url('/read/')}): everything on one page`,
+    `- [Résumé](${url('/resume/')})`,
+    `- [Contact](${url('/contact/')}): ${profile.email}`,
     '',
     '## Projects',
-    ...projects.map((p) => `- [${p.data.title}](${url(`/projects/${p.id}`)}): ${p.data.summary}`),
+    ...projects.map((p) => `- [${p.data.title}](${url(`/projects/${p.id}/`)}): ${p.data.summary}`),
     '',
   ].join('\n');
   return new Response(body, { headers: { 'content-type': 'text/plain; charset=utf-8' } });

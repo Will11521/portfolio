@@ -3,9 +3,9 @@ import { getEntry } from 'astro:content';
 import AppPage from '../layouts/AppPage.astro';
 const m = (await getEntry('projects', 'mikey'))!;
 ---
-<AppPage id="mikey" windowTitle="Mikey" title="Mikey — a desk-pet owl robot by Williamjeet Singh" description={m.data.summary} path="/mikey" w={640} x={330}>
+<AppPage id="mikey" windowTitle="Mikey" title="Mikey — a desk-pet owl robot by Williamjeet Singh" description={m.data.summary} path="/mikey/" w={640} x={330}>
   <h1>Mikey</h1>
   <p class="lede">{m.data.summary}</p>
   <div class="mikey3d" data-mikey3d><p class="meta">The 3D model of the owl body appears here.</p></div>
-  <p><a class="btn" href="/projects/mikey">Read the build story</a></p>
+  <p><a class="btn" href="/projects/mikey/">Read the build story</a></p>
 </AppPage>
