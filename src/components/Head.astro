@@ -1,9 +1,12 @@
 ---
 import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import { personJsonLd, profilePageJsonLd, ogPath } from '../lib/seo';
 interface Props { title: string; description: string; path: string }
 const { title, description, path } = Astro.props;
 const site = Astro.site!.href.replace(/\/$/, '');
 const canonical = site + (path === '/' ? '' : path);
+const og = site + ogPath(path);
+const ld = ['/', '/resume', '/read', '/contact'].includes(path) ? profilePageJsonLd(path) : personJsonLd();
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,6 +14,20 @@ const canonical = site + (path === '/' ? '' : path);
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 <meta name="theme-color" content="#f59e7b" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="WilliamOS — Williamjeet Singh" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={og} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:locale" content="en_CA" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
 {path === '/' && <link rel="alternate" type="text/html" href="/read" title="Read the paper" />}
 <script is:inline>

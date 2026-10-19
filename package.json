@@ -9,7 +9,8 @@
     "preview": "astro preview --port 4321 --ignore-lock",
     "check": "astro check",
     "test": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "og": "astro build && node scripts/og.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
@@ -20,6 +21,7 @@
     "astro": "^7.4.1",
     "happy-dom": "^21.0.3",
     "linkinator": "^8.1.0",
+    "sharp": "^0.35.5",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   },

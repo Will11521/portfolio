@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://williamdev.is-a.dev/sitemap.xml
