@@ -21,4 +21,4 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run e2e
       - run: npx lhci autorun
-      - run: npx linkinator dist --recurse --skip "^https?://(?!localhost)"
+      - run: npx linkinator . --server-root dist --recurse --skip "williamdev\\.is-a\\.dev" --skip "linkedin\\.com" --skip "github\\.com" --skip "wyngaardenpastries"
