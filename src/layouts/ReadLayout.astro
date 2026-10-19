@@ -1,0 +1,24 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/600.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/paper.css';
+import '../styles/read.css';
+import '../styles/print.css';
+import Head from '../components/Head.astro';
+interface Props { title: string; description: string; path: string }
+const { title, description, path } = Astro.props;
+---
+<!doctype html>
+<html lang="en-CA" data-wallpaper="paper" class="read-mode">
+  <head>
+    <Head title={title} description={description} path={path} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#read">Skip to the paper</a>
+    <main id="read" class="read paper"><slot /></main>
+  </body>
+</html>

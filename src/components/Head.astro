@@ -1,0 +1,26 @@
+---
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+interface Props { title: string; description: string; path: string }
+const { title, description, path } = Astro.props;
+const site = Astro.site!.href.replace(/\/$/, '');
+const canonical = site + (path === '/' ? '' : path);
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="theme-color" content="#f59e7b" />
+<link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+{path === '/' && <link rel="alternate" type="text/html" href="/read" title="Read the paper" />}
+<script is:inline>
+  (function () {
+    if (location.pathname === '/' && /(^|[?&])read(=|&|$)/.test(location.search.slice(1))) { location.replace('/read'); return; }
+    var d = document.documentElement, s = null;
+    try { s = localStorage.getItem('wos-wallpaper'); } catch (e) {}
+    var ok = s === 'sunset' || s === 'paper' || s === 'night';
+    d.dataset.wallpaper = ok ? s : (matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'sunset');
+    d.classList.add('js');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduce');
+  })();
+</script>

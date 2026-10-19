@@ -1,7 +1,57 @@
 ---
-import OsLayout from '../layouts/OsLayout.astro';
-import Window from '../components/Window.astro';
+import { getCollection } from 'astro:content';
+import ReadLayout from '../layouts/ReadLayout.astro';
+import { profile, monthLabel } from '../data/profile';
+import { formatEdition } from '../lib/edition';
+const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const cases = all.filter((p) => p.data.kind === 'case');
+const clippings = all.filter((p) => p.data.kind === 'clipping');
+const demote = (html = '') => html.replace(/<h2(\s|>)/g, '<h4$1').replace(/<\/h2>/g, '</h4>');
 ---
-<OsLayout title="Read the paper — Williamjeet Singh" description="Everything on one page: William's current role, case studies, résumé and contact." path="/read" focus="front">
-  <Window id="read" title="The William" focus><h1>Read the paper</h1></Window>
-</OsLayout>
+<ReadLayout title="Read the paper — Williamjeet Singh, Business Systems Analyst" description="Everything on one page: William's current role, case studies, résumé and contact." path="/read">
+  <header class="read-head">
+    <p class="fp-dateline">{formatEdition(new Date())}</p>
+    <p class="masthead" aria-hidden="true">The William</p>
+    <h1>Williamjeet Singh, the analyst who builds systems that think</h1>
+    <p class="lede">{profile.title} at {profile.employer}, {profile.city}. {profile.summary.split('. ').slice(1).join('. ')}</p>
+    <p class="read-contact"><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · <a href="/">Open WilliamOS →</a></p>
+  </header>
+  <section aria-labelledby="r-now">
+    <h2 id="r-now">Now</h2>
+    <p><strong>{profile.title}</strong>, {profile.employer} · since {monthLabel(profile.since)} · {profile.city}. {profile.availability}</p>
+  </section>
+  <section aria-labelledby="r-cases">
+    <h2 id="r-cases">Case studies</h2>
+    {cases.map((p) => (
+      <article>
+        <p class="kicker">{p.data.kicker} · {p.data.status}</p>
+        <h3>{p.data.title}</h3>
+        <p class="lede">{p.data.summary}</p>
+        <Fragment set:html={demote(p.rendered?.html)} />
+      </article>
+    ))}
+  </section>
+  <section aria-labelledby="r-clips">
+    <h2 id="r-clips">Clippings</h2>
+    <ul>{clippings.map((p) => <li><a href={`/projects/${p.id}`}>{p.data.title}</a> — {p.data.summary}</li>)}</ul>
+  </section>
+  <section aria-labelledby="r-resume">
+    <h2 id="r-resume">Résumé</h2>
+    {profile.roles.map((r) => (
+      <div class="role">
+        <h3>{r.title}, {r.org}{r.note ? ` (${r.note})` : ''}</h3>
+        <p class="meta">{monthLabel(r.start)} – {monthLabel(r.end)}</p>
+        <ul>{r.bullets.map((b) => <li>{b}</li>)}</ul>
+      </div>
+    ))}
+    <h3>Education</h3>
+    {profile.education.map((e) => <p>{e.program}, {e.school} · {e.note} {e.year}</p>)}
+    <h3>Skills</h3>
+    <ul>{Object.entries(profile.skills).map(([k, v]) => <li><strong>{k}:</strong> {v.join(' · ')}</li>)}</ul>
+  </section>
+  <section aria-labelledby="r-contact">
+    <h2 id="r-contact">Contact</h2>
+    <p><a class="btn" href={`mailto:${profile.email}`}>{profile.email}</a></p>
+    <p><a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a> · {profile.city}, Canada</p>
+  </section>
+</ReadLayout>
